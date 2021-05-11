@@ -7,19 +7,23 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.HomeCardViewAdapter
+import com.cybernerd.companionBattleground.adapter.ViewPagerAdapter
 import com.cybernerd.companionBattleground.model.HomeCardViewModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : BaseFragment(), ClickListener {
-
-    lateinit var homeAdapter: HomeCardViewAdapter
-    lateinit var homeItemList: MutableList<HomeCardViewModel>
-    lateinit var homeModel: HomeCardViewModel
+/*
+    lateinit var viewPager: ViewPager2
+    lateinit var tabLayout: TabLayout*/
+    lateinit var viewPagerAdapter: ViewPagerAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,42 +36,34 @@ class HomeFragment : BaseFragment(), ClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeAdapter = HomeCardViewAdapter(requireContext(), this)
-        home_rv.adapter = homeAdapter
+        viewPagerAdapter = ViewPagerAdapter(this)
 
-        homeItemList = arrayListOf()
-        homeModel = HomeCardViewModel()
+        viewPager.adapter = viewPagerAdapter
 
-        home_rv.layoutManager = GridLayoutManager(requireContext(), 2)
+        viewPager.isUserInputEnabled = true
 
-        setHomeCardView()
+        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+
+            tab.text = when (position){
+                0 -> {
+                    "Videos"
+                }
+                1 -> {
+                    "News"
+                }
+                2 -> {
+                    "Rumors"
+                }
+                3 -> {
+                    "Tips"
+                }
+                else -> "Top Videos"
+            }
+
+        }.attach()
+
+
     }
 
-    private fun setHomeCardView() {
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 1"
-        homeItemList.add(homeModel)
 
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 2"
-        homeItemList.add(homeModel)
-
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 3"
-        homeItemList.add(homeModel)
-
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 4"
-        homeItemList.add(homeModel)
-
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 5"
-        homeItemList.add(homeModel)
-
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 6"
-        homeItemList.add(homeModel)
-
-        homeAdapter.setHomeCardView(homeItemList)
-    }
 }
