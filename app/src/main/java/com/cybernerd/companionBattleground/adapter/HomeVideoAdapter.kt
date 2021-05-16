@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import com.cybernerd.companionBattleground.R
-import com.cybernerd.companionBattleground.model.HomeVideoModel
+import com.cybernerd.companionBattleground.model.HomeVideosModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -16,10 +16,10 @@ import kotlinx.android.synthetic.main.item_home_video_layout.view.*
 
 class HomeVideoAdapter(val lifecycleOwner: LifecycleOwner,private val context: Context, val clickListeners: ClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var list: List<HomeVideoModel> = arrayListOf()
+    var list: List<HomeVideosModel> = arrayListOf()
     var isSelected = false
 
-    fun setHomeVideo(list: List<HomeVideoModel>) {
+    fun setHomeVideo(list: List<HomeVideosModel>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -36,7 +36,7 @@ class HomeVideoAdapter(val lifecycleOwner: LifecycleOwner,private val context: C
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.youtube_title_tv.text = list[position].youtuebeTitle
+        holder.itemView.youtube_title_tv.text = list[position].videos[position].title
 
         lifecycleOwner.lifecycle.addObserver(holder.itemView.youtube_player_view)
         holder.itemView.youtube_player_view.addYouTubePlayerListener(object : YouTubePlayerListener {
@@ -71,7 +71,7 @@ class HomeVideoAdapter(val lifecycleOwner: LifecycleOwner,private val context: C
 
             override fun onReady(youTubePlayer: YouTubePlayer) {
                 if(isSelected){
-                    youTubePlayer.loadVideo(list[position].youtubeId, 0F)
+                    youTubePlayer.loadVideo(list[position].videos[position].videoId, 0F)
                 }
             }
 
@@ -103,7 +103,7 @@ class HomeVideoAdapter(val lifecycleOwner: LifecycleOwner,private val context: C
         })
 
         holder.itemView.setOnClickListener {
-            clickListeners.homeVideoClickListener(list[position])
+            clickListeners.homeVideoClickListener(list[position].videos[position])
             isSelected = true
             notifyDataSetChanged()
         }

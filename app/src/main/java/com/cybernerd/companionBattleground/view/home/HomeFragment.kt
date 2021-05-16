@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.ViewPagerAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
-import com.cybernerd.companionBattleground.model.HomeVideoModel
+import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
@@ -64,7 +64,7 @@ class HomeFragment : BaseFragment(), ClickListener {
         TODO("Not yet implemented")
     }
 
-    override fun homeVideoClickListener(homeVideoModel: HomeVideoModel) {
+    override fun homeVideoClickListener(videos: Videos) {
         TODO("Not yet implemented")
     }
 
