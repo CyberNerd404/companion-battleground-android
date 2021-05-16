@@ -5,11 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.HomeNewsAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
-import com.cybernerd.companionBattleground.model.HomeVideoModel
+import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.BaseFragment
@@ -23,6 +24,10 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     lateinit var homeItemList: MutableList<HomeNewsModel>
     lateinit var homeModel: HomeNewsModel
 
+    private val viewModel: HomeNewsViewModel by lazy {
+        HomeNewsViewModel()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +38,13 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.getNews()
+        viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
+            debug("HomeFragment : news data = ${it.news}")
+
+        })
+
 
         homeAdapter = HomeNewsAdapter(requireContext(), this)
         home_news_rv.adapter = homeAdapter
@@ -90,7 +102,7 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
         }
     }
 
-    override fun homeVideoClickListener(homeVideoModel: HomeVideoModel) {
+    override fun homeVideoClickListener(videos: Videos) {
         TODO("Not yet implemented")
     }
 
