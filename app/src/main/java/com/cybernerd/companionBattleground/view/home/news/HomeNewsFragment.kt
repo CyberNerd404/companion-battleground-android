@@ -1,26 +1,27 @@
 package com.cybernerd.companionBattleground.view.home.news
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
-import com.cybernerd.companionBattleground.adapter.HomeCardViewAdapter
-import com.cybernerd.companionBattleground.model.HomeCardViewModel
+import com.cybernerd.companionBattleground.adapter.HomeNewsAdapter
+import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.HomeVideoModel
 import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.BaseFragment
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_news.*
 
 
 class HomeNewsFragment : BaseFragment(), ClickListener {
 
 
-    lateinit var homeAdapter: HomeCardViewAdapter
-    lateinit var homeItemList: MutableList<HomeCardViewModel>
-    lateinit var homeModel: HomeCardViewModel
+    lateinit var homeAdapter: HomeNewsAdapter
+    lateinit var homeItemList: MutableList<HomeNewsModel>
+    lateinit var homeModel: HomeNewsModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,11 +34,11 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeAdapter = HomeCardViewAdapter(requireContext(), this)
+        homeAdapter = HomeNewsAdapter(requireContext(), this)
         home_news_rv.adapter = homeAdapter
 
         homeItemList = arrayListOf()
-        homeModel = HomeCardViewModel()
+        homeModel = HomeNewsModel()
 
         home_news_rv.layoutManager = GridLayoutManager(requireContext(), 1)
 
@@ -45,15 +46,52 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     }
 
     private fun setHomeCardView() {
+        homeModel.image = R.drawable.battleground_logo
+        homeModel.name = "Testing 1"
+        homeItemList.add(0, homeModel)
 
-        homeItemList.add(HomeCardViewModel("Testing 1", "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"))
-        homeItemList.add(HomeCardViewModel("Testing 2", "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"))
-        homeItemList.add(HomeCardViewModel("Testing 3", "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"))
-        homeItemList.add(HomeCardViewModel("Testing 4", "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"))
-        homeItemList.add(HomeCardViewModel("Testing 5", "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"))
-        homeItemList.add(HomeCardViewModel("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.", "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"))
+        homeModel = HomeNewsModel()
+        homeModel.image = R.drawable.pubg_logo
+        homeModel.name = "Testing 2"
+        homeItemList.add(1, homeModel)
+
+        homeModel = HomeNewsModel()
+        homeModel.image = R.drawable.logo_two
+        homeModel.name = "Testing 3"
+        homeItemList.add(2, homeModel)
+
+        homeModel = HomeNewsModel()
+        homeModel.image = R.drawable.battleground_logo
+        homeModel.name = "Testing 4"
+        homeItemList.add(3, homeModel)
+
+        homeModel = HomeNewsModel()
+        homeModel.image = R.drawable.logo_two
+        homeModel.name = "Testing 5"
+        homeItemList.add(4, homeModel)
+
+        homeModel = HomeNewsModel()
+        homeModel.image = R.drawable.pubg_logo
+        homeModel.name = "Testing 6"
+        homeItemList.add(5, homeModel)
+
+        debug(" size : ${homeItemList.size} homeItemList:$homeItemList")
 
         homeAdapter.setHomeCardView(homeItemList)
+    }
+
+    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
+        activity.let {
+            Intent(it, NewsActivity::class.java).apply {
+                putExtra("name", homeNewsModel.name)
+                putExtra("img", homeNewsModel.image)
+                startActivity(this)
+            }
+        }
+    }
+
+    override fun homeVideoClickListener(homeVideoModel: HomeVideoModel) {
+        TODO("Not yet implemented")
     }
 
 
