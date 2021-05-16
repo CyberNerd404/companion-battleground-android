@@ -46,32 +46,32 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     }
 
     private fun setHomeCardView() {
-        homeModel.image = R.drawable.battleground_logo
+        homeModel.image = "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"
         homeModel.name = "Testing 1"
         homeItemList.add(0, homeModel)
 
         homeModel = HomeNewsModel()
-        homeModel.image = R.drawable.pubg_logo
+        homeModel.image = "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"
         homeModel.name = "Testing 2"
         homeItemList.add(1, homeModel)
 
         homeModel = HomeNewsModel()
-        homeModel.image = R.drawable.logo_two
+        homeModel.image = "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"
         homeModel.name = "Testing 3"
         homeItemList.add(2, homeModel)
 
         homeModel = HomeNewsModel()
-        homeModel.image = R.drawable.battleground_logo
+        homeModel.image = "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"
         homeModel.name = "Testing 4"
         homeItemList.add(3, homeModel)
 
         homeModel = HomeNewsModel()
-        homeModel.image = R.drawable.logo_two
+        homeModel.image = "https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"
         homeModel.name = "Testing 5"
         homeItemList.add(4, homeModel)
 
         homeModel = HomeNewsModel()
-        homeModel.image = R.drawable.pubg_logo
+        homeModel.image ="https://images.hdqwalls.com/download/helmet-pubg-4k-2020-r1-1920x1080.jpg"
         homeModel.name = "Testing 6"
         homeItemList.add(5, homeModel)
 
