@@ -5,30 +5,25 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.cybernerd.companionBattleground.R
+import com.cybernerd.companionBattleground.adapter.HomeNewsAdapter
+import com.cybernerd.companionBattleground.adapter.HomeVideoAdapter
+import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.HomeVideoModel
+import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.debug
+import com.cybernerd.companionBattleground.view.BaseFragment
+import kotlinx.android.synthetic.main.fragment_home_news.*
+import kotlinx.android.synthetic.main.fragment_home_top_videos.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class HomeTopVideosFragment : BaseFragment(), ClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeTopVideosFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeTopVideosFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var homeAdapter: HomeVideoAdapter
+    lateinit var homeItemList: MutableList<HomeVideoModel>
+    lateinit var homeModel: HomeVideoModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +33,64 @@ class HomeTopVideosFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home_top_videos, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeTopVideosFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeTopVideosFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+
+        homeAdapter = HomeVideoAdapter(viewLifecycleOwner,requireContext(), this)
+        home_videos_rv.adapter = homeAdapter
+
+        homeItemList = arrayListOf()
+        homeModel = HomeVideoModel()
+
+        home_videos_rv.layoutManager = LinearLayoutManager(requireContext())
+
+        setHomeVideos()
+
     }
+
+    private fun setHomeVideos() {
+        homeModel.youtubeId = "5INZBeuaETg"
+        homeModel.youtuebeTitle = "Testing 1"
+        homeItemList.add(0, homeModel)
+
+        /*homeModel = HomeVideoModel()
+        homeModel.youtubeId = "RMWVftPRGro"
+        homeModel.youtuebeTitle = "Testing 2"
+        homeItemList.add(1, homeModel)
+
+        homeModel = HomeVideoModel()
+        homeModel.youtubeId = "RMWVftPRGro"
+        homeModel.youtuebeTitle = "Testing 3"
+        homeItemList.add(2, homeModel)
+
+        homeModel = HomeVideoModel()
+        homeModel.youtubeId = "RMWVftPRGro"
+        homeModel.youtuebeTitle = "Testing 4"
+        homeItemList.add(3, homeModel)
+
+        homeModel = HomeVideoModel()
+        homeModel.youtubeId = "RMWVftPRGro"
+        homeModel.youtuebeTitle = "Testing 5"
+        homeItemList.add(4, homeModel)
+
+        homeModel = HomeVideoModel()
+        homeModel.youtubeId = "RMWVftPRGro"
+        homeModel.youtuebeTitle = "Testing 6"
+        homeItemList.add(5, homeModel)
+*/
+        debug(" size : ${homeItemList.size} homeItemList:$homeItemList")
+
+        homeAdapter.setHomeVideo(homeItemList)
+    }
+
+    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun homeVideoClickListener(homeVideoModel: HomeVideoModel) {
+        debug("videoId : ${homeVideoModel.youtubeId} & videoTitle : ${homeVideoModel.youtuebeTitle}")
+    }
+
+
 }
