@@ -13,20 +13,24 @@ class HomeVideoRepository {
     val videoLiveData = MutableLiveData<HomeVideosModel>()
 
     fun getVideo(){
-        CompanionApi().getHomeVideos().enqueue(object : Callback<HomeVideosModel>{
-            override fun onResponse(
-                call: Call<HomeVideosModel>,
-                response: Response<HomeVideosModel>
-            ) {
+            CompanionApi().getHomeVideos().enqueue(object : Callback<HomeVideosModel>{
+                override fun onResponse(
+                    call: Call<HomeVideosModel>,
+                    response: Response<HomeVideosModel>
+                ) {
 //                videoLiveData.value = response.body()
-                debug("RepositorySuccess : call = ${response.body()}")
+                    debug("RepositorySuccess : call = ${response.body()}")
 
-            }
+                }
 
-            override fun onFailure(call: Call<HomeVideosModel>, t: Throwable) {
-                error("RepositoryFailure : error = ${t.message}")
-            }
+                override fun onFailure(call: Call<HomeVideosModel>, t: Throwable) {
+                    try {
+                        error("RepositoryFailure : error = ${t.message}")
+                    }catch (e:Exception){}
 
-        })
+                }
+
+            })
+
     }
 }
