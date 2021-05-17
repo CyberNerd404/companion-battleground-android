@@ -11,26 +11,33 @@ import retrofit2.Response
 
 class HomeVideoRepository {
     val videoLiveData = MutableLiveData<HomeVideosModel>()
+    val showProgress = MutableLiveData<Boolean>()
 
-    fun getVideo(){
-            CompanionApi().getHomeVideos().enqueue(object : Callback<HomeVideosModel>{
-                override fun onResponse(
-                    call: Call<HomeVideosModel>,
-                    response: Response<HomeVideosModel>
-                ) {
-//                videoLiveData.value = response.body()
-                    debug("RepositorySuccess : call = ${response.body()}")
+    fun getVideo() {
+        showProgress.value = true
+        CompanionApi().getHomeVideos().enqueue(object : Callback<HomeVideosModel> {
+            override fun onResponse(
+                call: Call<HomeVideosModel>,
+                response: Response<HomeVideosModel>
+            ) {
+                videoLiveData.value = response.body()
+                debug("RepositorySuccess : call = ${response.body()}")
+                showProgress.value = false
 
+
+            }
+
+            override fun onFailure(call: Call<HomeVideosModel>, t: Throwable) {
+                try {
+                    showProgress.value = false
+                    error("RepositoryFailure : error = ${t.message}")
+                } catch (e: Exception) {
+                    showProgress.value = false
                 }
 
-                override fun onFailure(call: Call<HomeVideosModel>, t: Throwable) {
-                    try {
-                        error("RepositoryFailure : error = ${t.message}")
-                    }catch (e:Exception){}
+            }
 
-                }
-
-            })
+        })
 
     }
 }
