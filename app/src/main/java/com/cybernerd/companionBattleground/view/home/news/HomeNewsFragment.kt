@@ -38,18 +38,26 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        homeAdapter = HomeNewsAdapter(requireContext(), this)
+        home_news_rv.adapter = homeAdapter
+
+
+        home_news_rv.layoutManager = GridLayoutManager(requireContext(), 1)
+
         viewModel.getNews()
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
             debug("HomeFragment : news data = ${it.news}")
             setHomeCardView(it)
         })
 
+        viewModel.showprogress.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                news_progressbar.visibility = View.VISIBLE
+            } else {
+                news_progressbar.visibility = View.GONE
+            }
+        })
 
-        homeAdapter = HomeNewsAdapter(requireContext(), this)
-        home_news_rv.adapter = homeAdapter
-
-
-        home_news_rv.layoutManager = GridLayoutManager(requireContext(), 1)
 
     }
 
