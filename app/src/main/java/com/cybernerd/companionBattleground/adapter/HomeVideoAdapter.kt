@@ -4,22 +4,19 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybernerd.companionBattleground.R
-import com.cybernerd.companionBattleground.model.HomeVideosModel
+import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.utils.ClickListener
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
-import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerListener
 import kotlinx.android.synthetic.main.item_home_video_layout.view.*
 
-class HomeVideoAdapter(val lifecycleOwner: LifecycleOwner,private val context: Context, val clickListeners: ClickListener) :
+class HomeVideoAdapter(private val context: Context, val clickListeners: ClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var list: List<HomeVideosModel> = arrayListOf()
-    var isSelected = false
+    var list: List<Videos> = arrayListOf()
 
-    fun setHomeVideo(list: List<HomeVideosModel>) {
+    fun setHomeVideo(list: List<Videos>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -36,85 +33,22 @@ class HomeVideoAdapter(val lifecycleOwner: LifecycleOwner,private val context: C
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        holder.itemView.youtube_title_tv.text = list[position].videos[position].title
 
-        lifecycleOwner.lifecycle.addObserver(holder.itemView.youtube_player_view)
-        holder.itemView.youtube_player_view.addYouTubePlayerListener(object : YouTubePlayerListener {
-            override fun onApiChange(youTubePlayer: YouTubePlayer) {
-                TODO("Not yet implemented")
-            }
+        Glide.with(this.context)
+            .load(list[position].thumbnail)
+            .placeholder(R.drawable.battleground_logo)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.itemView.youtube_thumbnail)
 
-            override fun onCurrentSecond(youTubePlayer: YouTubePlayer, second: Float) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onError(youTubePlayer: YouTubePlayer, error: PlayerConstants.PlayerError) {
-//                youTubePlayer.loadVideo(list[position].youtubeId,0f)
-
-            }
-
-            override fun onPlaybackQualityChange(
-                youTubePlayer: YouTubePlayer,
-                playbackQuality: PlayerConstants.PlaybackQuality
-            ) {
-//                youTubePlayer.loadVideo(list[position].youtubeId,0f)
-
-            }
-
-            override fun onPlaybackRateChange(
-                youTubePlayer: YouTubePlayer,
-                playbackRate: PlayerConstants.PlaybackRate
-            ) {
-//                youTubePlayer.loadVideo(list[position].youtubeId,0f)
-
-            }
-
-            override fun onReady(youTubePlayer: YouTubePlayer) {
-                if(isSelected){
-                    youTubePlayer.loadVideo(list[position].videos[position].videoId, 0F)
-                }
-            }
-
-            override fun onStateChange(
-                youTubePlayer: YouTubePlayer,
-                state: PlayerConstants.PlayerState
-            ) {
-//                youTubePlayer.loadVideo(list[position].youtubeId,0f)
-
-            }
-
-            override fun onVideoDuration(youTubePlayer: YouTubePlayer, duration: Float) {
-//                youTubePlayer.loadVideo(list[position].youtubeId,0f)
-
-            }
-
-            override fun onVideoId(youTubePlayer: YouTubePlayer, videoId: String) {
-//                youTubePlayer.loadVideo(list[position].youtubeId,0f)
-            }
-
-            override fun onVideoLoadedFraction(
-                youTubePlayer: YouTubePlayer,
-                loadedFraction: Float
-            ) {
-//                youTubePlayer.loadVideo(list[position].youtubeId,0f)
-
-            }
-
-        })
+        holder.itemView.youtube_title.text = list[position].title
 
         holder.itemView.setOnClickListener {
-            clickListeners.homeVideoClickListener(list[position].videos[position])
-            isSelected = true
-            notifyDataSetChanged()
+            clickListeners.homeVideoClickListener(list[position])
         }
 
     }
 
 
-     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val youtubeId = view.youtube_player_view
-        val title = view.youtube_title_tv
-
-    }
+     class ViewHolder(view: View) : RecyclerView.ViewHolder(view)
 
 }
