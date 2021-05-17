@@ -1,8 +1,7 @@
 package com.cybernerd.companionBattleground.network
 
-import com.cybernerd.companionBattleground.model.HomeNews1Model
+import com.cybernerd.companionBattleground.model.HomeNewsListModel
 import com.cybernerd.companionBattleground.model.HomeVideosModel
-import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -26,7 +25,7 @@ interface CompanionApi {
     fun getHomeVideos(): Call<HomeVideosModel>
 
     @GET("/api/v1/news")
-    fun getHomeNews(): Call<HomeNews1Model>
+    fun getHomeNews(): Call<HomeNewsListModel>
 
 
 }
