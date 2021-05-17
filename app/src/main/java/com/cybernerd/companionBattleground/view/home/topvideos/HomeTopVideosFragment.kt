@@ -1,8 +1,11 @@
 package com.cybernerd.companionBattleground.view.home.topvideos
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,19 +36,26 @@ class HomeTopVideosFragment : BaseFragment(), ClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getVideo()
-        viewModel.videoLiveData.observe(viewLifecycleOwner, Observer {
-            debug("HomeFragment : video data = ${it.videos}")
-        })
-
-
-        homeAdapter = HomeVideoAdapter(viewLifecycleOwner, requireContext(), this)
+        homeAdapter = HomeVideoAdapter(requireContext(), this)
         home_videos_rv.adapter = homeAdapter
 
 
         home_videos_rv.layoutManager = LinearLayoutManager(requireContext())
 
-        setHomeVideos()
+        viewModel.getVideo()
+        viewModel.videoLiveData.observe(viewLifecycleOwner, Observer {
+            debug("HomeFragment : video data = ${it.videos}")
+            homeAdapter.setHomeVideo(it.videos)
+        })
+
+        viewModel.showprogress.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                video_progressbar.visibility = VISIBLE
+            } else {
+                video_progressbar.visibility = GONE
+            }
+        })
+
 
     }
 
@@ -59,7 +69,12 @@ class HomeTopVideosFragment : BaseFragment(), ClickListener {
 
 
     override fun homeVideoClickListener(video: Videos) {
-
+        activity.let {
+            Intent(it, VideoActivity::class.java).apply {
+                putExtra("videoId", video.videoId)
+                startActivity(this)
+            }
+        }
     }
 
 
