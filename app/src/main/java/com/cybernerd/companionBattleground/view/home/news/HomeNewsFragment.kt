@@ -69,7 +69,7 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
         activity.let {
             Intent(it, NewsActivity::class.java).apply {
                 putExtra("name", homeNewsModel.title)
-                putExtra("img", homeNewsModel.link)
+                putExtra("img", homeNewsModel.media)
                 startActivity(this)
             }
         }
