@@ -41,10 +41,10 @@ class HomeFragment : BaseFragment(), ClickListener {
 
             tab.text = when (position) {
                 0 -> {
-                    "Videos"
+                    "News"
                 }
                 1 -> {
-                    "News"
+                    "Videos"
                 }
                 2 -> {
                     "Rumors"
@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment(), ClickListener {
                 3 -> {
                     "Tips"
                 }
-                else -> "Top Videos"
+                else -> "News"
             }
 
         }.attach()
@@ -61,7 +61,7 @@ class HomeFragment : BaseFragment(), ClickListener {
     }
 
     override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
-        TODO("Not yet implemented")
+
     }
 
     override fun homeVideoClickListener(videos: Videos) {

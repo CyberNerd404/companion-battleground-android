@@ -68,8 +68,7 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
         activity.let {
             Intent(it, NewsActivity::class.java).apply {
-                putExtra("name", homeNewsModel.title)
-                putExtra("img", homeNewsModel.media)
+                putExtra("homeNewsModel", homeNewsModel)
                 startActivity(this)
             }
         }

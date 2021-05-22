@@ -1,5 +1,9 @@
 package com.cybernerd.companionBattleground.model
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 data class HomeNewsModel(
     val __v: Int,
     val _id: String,
@@ -14,4 +18,5 @@ data class HomeNewsModel(
     val rights: String,
     val title: String,
     val updatedAt: String
-)
+) : Parcelable
+

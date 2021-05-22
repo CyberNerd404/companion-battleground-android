@@ -10,16 +10,16 @@ import com.cybernerd.companionBattleground.view.home.topvideos.HomeTopVideosFrag
 
 class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
 
         when(position) {
             0 -> {
-                return HomeTopVideosFragment()
+                return HomeNewsFragment()
             }
             1 -> {
-                return HomeNewsFragment()
+                return HomeTopVideosFragment()
             }
             2 -> {
                 return HomeRumorsFragment()
