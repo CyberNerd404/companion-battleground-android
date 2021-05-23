@@ -48,9 +48,12 @@ class HomeFragment : BaseFragment(), ClickListener {
                     "Videos"
                 }
                 2 -> {
-                    "Rumors"
+                    "Wallpapaers"
                 }
                 3 -> {
+                    "Rumors"
+                }
+                4 -> {
                     "Tips"
                 }
                 else -> "News"
