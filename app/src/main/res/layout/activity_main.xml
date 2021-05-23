@@ -50,8 +50,8 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/round_background_bottomview"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:itemIconTint="@color/nav_icon"
-        app:itemTextColor="@color/nav_icon"
+        app:itemIconTint="@drawable/bottom_navbar_color"
+        app:itemTextColor="@drawable/bottom_navbar_color"
         app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
