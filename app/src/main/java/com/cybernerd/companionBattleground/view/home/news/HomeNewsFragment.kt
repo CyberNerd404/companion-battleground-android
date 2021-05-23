@@ -9,10 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.HomeNewsAdapter
-import com.cybernerd.companionBattleground.model.HomeNewsListModel
-import com.cybernerd.companionBattleground.model.HomeNewsModel
-import com.cybernerd.companionBattleground.model.Notification
-import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.*
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.BaseFragment
@@ -80,6 +77,10 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     }
 
     override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
+    }
+
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
         TODO("Not yet implemented")
     }
 

@@ -11,6 +11,7 @@ import com.cybernerd.companionBattleground.adapter.SettingsAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
 import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
 import com.cybernerd.companionBattleground.view.home.news.NewsActivity
@@ -83,6 +84,10 @@ class SettingFragment : BaseFragment(), ClickListener {
     }
 
     override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
+    }
+
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
         TODO("Not yet implemented")
     }
 

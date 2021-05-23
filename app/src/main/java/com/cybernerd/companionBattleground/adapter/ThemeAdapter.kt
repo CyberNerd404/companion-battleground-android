@@ -60,6 +60,10 @@ class ThemeAdapter(private val context: Context, val clickListeners: ClickListen
                     // clear it here as you can no longer have the bitmap
                 }
             })
+
+        holder.itemView.setOnClickListener {
+            clickListeners.wallpaperClickListener(list[position])
+        }
     }
 
 

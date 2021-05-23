@@ -1,5 +1,6 @@
 package com.cybernerd.companionBattleground.view.home.wallpapers
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -63,5 +64,13 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
 
     override fun notificationClickListener(notification: Notification) {
         TODO("Not yet implemented")
+    }
+
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+        Intent(requireContext(), WallpaperActivity::class.java).apply {
+            putExtra("imageUrl", wallpaperModel.imageLink)
+            putExtra("imageTitle", wallpaperModel.title)
+            startActivity(this)
+        }
     }
 }
