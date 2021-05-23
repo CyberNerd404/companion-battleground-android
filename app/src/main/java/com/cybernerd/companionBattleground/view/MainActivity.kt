@@ -1,7 +1,6 @@
 package com.cybernerd.companionBattleground.view
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -13,7 +12,7 @@ import com.cybernerd.companionBattleground.view.notification.NotificationFragmen
 import com.cybernerd.companionBattleground.view.setting.SettingFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var navController: NavController
 
@@ -23,10 +22,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navController = findNavController(R.id.fragmentContainer)
-
-
         initBottomNavigation()
     }
+
 
     private fun initBottomNavigation() {
         val extras = intent.extras
@@ -55,5 +53,8 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commitAllowingStateLoss()
         supportFragmentManager.executePendingTransactions()
+
     }
+
+
 }

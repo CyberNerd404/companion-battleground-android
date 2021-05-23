@@ -6,25 +6,29 @@ import com.cybernerd.companionBattleground.view.home.news.HomeNewsFragment
 import com.cybernerd.companionBattleground.view.home.rumors.HomeRumorsFragment
 import com.cybernerd.companionBattleground.view.home.tipsandtricks.HomeTipsTrickFragment
 import com.cybernerd.companionBattleground.view.home.topvideos.HomeTopVideosFragment
+import com.cybernerd.companionBattleground.view.home.wallpapers.HomeWallpaperFragment
 
 
 class ViewPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = 4
+    override fun getItemCount(): Int = 3
 
     override fun createFragment(position: Int): Fragment {
 
         when(position) {
             0 -> {
-                return HomeTopVideosFragment()
-            }
-            1 -> {
                 return HomeNewsFragment()
             }
+            1 -> {
+                return HomeTopVideosFragment()
+            }
             2 -> {
-                return HomeRumorsFragment()
+                return HomeWallpaperFragment()
             }
             3 -> {
+                return HomeRumorsFragment()
+            }
+            4 -> {
                 return HomeTipsTrickFragment()
             }
 

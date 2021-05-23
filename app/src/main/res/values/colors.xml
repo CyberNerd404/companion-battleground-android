@@ -9,4 +9,11 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#B13535</color>
 
+    <!-- Color for Bottom NavBar. -->
+    <color name="nav_icon">#FF000000</color>
+    <color name="tab_text_color">#FFFFFFFF</color>
+
+
+    <color name="pubg_color">#DE8D00</color>
+
 </resources>

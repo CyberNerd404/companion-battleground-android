@@ -1,26 +1,29 @@
 package com.cybernerd.companionBattleground.view.home.news
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
-import com.cybernerd.companionBattleground.adapter.HomeCardViewAdapter
-import com.cybernerd.companionBattleground.model.HomeCardViewModel
+import com.cybernerd.companionBattleground.adapter.HomeNewsAdapter
+import com.cybernerd.companionBattleground.model.*
 import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.BaseFragment
-import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home_news.*
 
 
 class HomeNewsFragment : BaseFragment(), ClickListener {
 
 
-    lateinit var homeAdapter: HomeCardViewAdapter
-    lateinit var homeItemList: MutableList<HomeCardViewModel>
-    lateinit var homeModel: HomeCardViewModel
+    lateinit var homeAdapter: HomeNewsAdapter
+
+    private val viewModel: HomeNewsViewModel by lazy {
+        HomeNewsViewModel()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,43 +36,56 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeAdapter = HomeCardViewAdapter(requireContext(), this)
+        homeAdapter = HomeNewsAdapter(requireContext(), this)
         home_news_rv.adapter = homeAdapter
 
-        homeItemList = arrayListOf()
-        homeModel = HomeCardViewModel()
 
-        home_news_rv.layoutManager = GridLayoutManager(requireContext(), 2)
+        home_news_rv.layoutManager = GridLayoutManager(requireContext(), 1)
 
-        setHomeCardView()
+        viewModel.getNews()
+        viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
+            debug("HomeFragment : news data = ${it.news}")
+            setHomeCardView(it)
+        })
+
+        viewModel.showprogress.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                news_progressbar.visibility = View.VISIBLE
+            } else {
+                news_progressbar.visibility = View.GONE
+            }
+        })
+
+
     }
 
-    private fun setHomeCardView() {
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 1"
-        homeItemList.add(homeModel)
+    private fun setHomeCardView(newsResponse: HomeNewsListModel) {
+        homeAdapter.setHomeCardView(newsResponse)
+    }
 
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 2"
-        homeItemList.add(homeModel)
+    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
+        activity.let {
+            Intent(it, NewsActivity::class.java).apply {
+                putExtra("homeNewsModel", homeNewsModel)
+                startActivity(this)
+            }
+        }
+    }
 
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 3"
-        homeItemList.add(homeModel)
+    override fun homeVideoClickListener(videos: Videos) {
+        TODO("Not yet implemented")
+    }
 
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 4"
-        homeItemList.add(homeModel)
+    override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
+    }
 
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 5"
-        homeItemList.add(homeModel)
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+        TODO("Not yet implemented")
+    }
 
-        homeModel.image = R.drawable.battleground_logo
-        homeModel.name = "Testing 6"
-        homeItemList.add(homeModel)
-
-        homeAdapter.setHomeCardView(homeItemList)
+    override fun settingsClickListener(position: Int) {
+        TODO("Not yet implemented")
     }
 
 

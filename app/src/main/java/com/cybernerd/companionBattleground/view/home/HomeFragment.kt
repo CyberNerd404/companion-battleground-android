@@ -1,28 +1,25 @@
 package com.cybernerd.companionBattleground.view.home
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
 import com.cybernerd.companionBattleground.R
-import com.cybernerd.companionBattleground.adapter.HomeCardViewAdapter
 import com.cybernerd.companionBattleground.adapter.ViewPagerAdapter
-import com.cybernerd.companionBattleground.model.HomeCardViewModel
+import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
+import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : BaseFragment(), ClickListener {
-/*
-    lateinit var viewPager: ViewPager2
-    lateinit var tabLayout: TabLayout*/
+    /*
+        lateinit var viewPager: ViewPager2
+        lateinit var tabLayout: TabLayout*/
     lateinit var viewPagerAdapter: ViewPagerAdapter
 
     override fun onCreateView(
@@ -40,29 +37,52 @@ class HomeFragment : BaseFragment(), ClickListener {
 
         viewPager.adapter = viewPagerAdapter
 
-        viewPager.isUserInputEnabled = true
+        viewPager.isUserInputEnabled = false
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
 
-            tab.text = when (position){
+            tab.text = when (position) {
                 0 -> {
-                    "Videos"
-                }
-                1 -> {
                     "News"
                 }
+                1 -> {
+                    "Videos"
+                }
                 2 -> {
-                    "Rumors"
+                    "Wallpapaers"
                 }
                 3 -> {
+                    "Rumors"
+                }
+                4 -> {
                     "Tips"
                 }
-                else -> "Top Videos"
+                else -> "News"
             }
 
         }.attach()
 
 
+    }
+
+    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
+
+    }
+
+    override fun homeVideoClickListener(videos: Videos) {
+        TODO("Not yet implemented")
+    }
+
+    override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
+    }
+
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun settingsClickListener(position: Int) {
+        TODO("Not yet implemented")
     }
 
 
