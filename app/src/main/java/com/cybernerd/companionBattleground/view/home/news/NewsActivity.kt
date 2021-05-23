@@ -3,11 +3,13 @@ package com.cybernerd.companionBattleground.view.home.news
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybernerd.companionBattleground.R
-import com.google.android.material.appbar.CollapsingToolbarLayout
+import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.utils.debug
 import kotlinx.android.synthetic.main.activity_news.*
 import kotlinx.android.synthetic.main.item_home_news_layout.view.*
 
@@ -17,16 +19,28 @@ class NewsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_news)
 
-        val intent = intent.extras
+        val homeNewsModel = intent.extras?.getParcelable<HomeNewsModel>("homeNewsModel")
+        toolbar.setNavigationIcon(R.drawable.ic_back_icon)
+        toolbar.setNavigationOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                finish()
+            }
+        })
 
-        val imv = intent?.getString("img")
         Glide.with(this)
-            .load(imv)
+            .load(homeNewsModel?.media)
             .placeholder(R.drawable.battleground_logo)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(news_image)
-//        val toolbar_layout = findViewById<CollapsingToolbarLayout>(R.id.collapsing_toolbar)
         collapsing_toolbar.setExpandedTitleColor(Color.WHITE);
+
+        text_rights.text = homeNewsModel?.rights ?:""
+        news_title.text = homeNewsModel?.title ?: ""
+        published_date.text = homeNewsModel?.publishedDate ?: ""
+        news_description.text = homeNewsModel?.description ?: ""
+        debug("hi"+ homeNewsModel?.description ?: "")
+
+
 
 //        if (imv != null) {
 //            news_iv.setImageResource(imv)

@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.HomeVideoAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.BaseFragment
@@ -75,6 +77,18 @@ class HomeTopVideosFragment : BaseFragment(), ClickListener {
                 startActivity(this)
             }
         }
+    }
+
+    override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
+    }
+
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun settingsClickListener(position: Int) {
+        TODO("Not yet implemented")
     }
 
 

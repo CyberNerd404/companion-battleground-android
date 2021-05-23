@@ -11,6 +11,6 @@ fun validate(message: String){
     Log.d("validate", message)
 }
 
-fun error(message: String) {
+fun errorDebug(message: String) {
     Log.d("error", message)
 }

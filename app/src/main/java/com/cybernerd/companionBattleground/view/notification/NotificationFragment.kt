@@ -1,33 +1,33 @@
 package com.cybernerd.companionBattleground.view.notification
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
+import com.cybernerd.companionBattleground.adapter.NotificationAdapter
+import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
+import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.WallpaperModel
+import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.view.BaseFragment
+import com.cybernerd.companionBattleground.view.home.news.NewsActivity
+import com.cybernerd.companionBattleground.view.home.topvideos.VideoActivity
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.android.synthetic.main.fragment_home_news.*
+import kotlinx.android.synthetic.main.fragment_notification.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [NotificationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class NotificationFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class NotificationFragment : BaseFragment(), ClickListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+    lateinit var notificationAdapter: NotificationAdapter
+    val viewModel: NotificationViewModel by lazy {
+        NotificationViewModel()
     }
 
     override fun onCreateView(
@@ -38,23 +38,66 @@ class NotificationFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_notification, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment NotificationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            NotificationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        notificationAdapter = NotificationAdapter(requireContext(), this)
+        notification_rv.adapter = notificationAdapter
+
+
+        notification_rv.layoutManager = GridLayoutManager(requireContext(), 1)
+
+        viewModel.getNotifications()
+        viewModel.liveData.observe(viewLifecycleOwner, Observer {
+            notificationAdapter.setNotification(it)
+        })
+
+        viewModel.showprogress.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                noti_progressbar.visibility = View.VISIBLE
+            } else {
+                noti_progressbar.visibility = View.GONE
+            }
+        })
+
+
+    }
+
+    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun homeVideoClickListener(videoMode: Videos) {
+        TODO("Not yet implemented")
+    }
+
+    override fun settingsClickListener(position: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun notificationClickListener(notification: Notification) {
+
+        when (notification.type) {
+            "video" -> {
+                Intent(requireContext(), VideoActivity::class.java).apply {
+                    putExtra("videoId", notification._id)
+                    startActivity(this)
                 }
             }
+
+            "news" -> {
+                Intent(requireContext(), NewsActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
+
+        }
+
+
     }
+
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+        TODO("Not yet implemented")
+    }
+
 }

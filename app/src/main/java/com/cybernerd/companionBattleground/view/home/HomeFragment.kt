@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.ViewPagerAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
@@ -41,18 +43,21 @@ class HomeFragment : BaseFragment(), ClickListener {
 
             tab.text = when (position) {
                 0 -> {
-                    "Videos"
-                }
-                1 -> {
                     "News"
                 }
+                1 -> {
+                    "Videos"
+                }
                 2 -> {
-                    "Rumors"
+                    "Wallpapaers"
                 }
                 3 -> {
+                    "Rumors"
+                }
+                4 -> {
                     "Tips"
                 }
-                else -> "Top Videos"
+                else -> "News"
             }
 
         }.attach()
@@ -61,10 +66,22 @@ class HomeFragment : BaseFragment(), ClickListener {
     }
 
     override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
-        TODO("Not yet implemented")
+
     }
 
     override fun homeVideoClickListener(videos: Videos) {
+        TODO("Not yet implemented")
+    }
+
+    override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
+    }
+
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun settingsClickListener(position: Int) {
         TODO("Not yet implemented")
     }
 

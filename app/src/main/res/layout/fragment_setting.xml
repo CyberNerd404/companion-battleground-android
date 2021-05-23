@@ -4,18 +4,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:background="@drawable/app_background_image"
     tools:context=".view.setting.SettingFragment">
 
+
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/notiticationTitle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Setting"
+        android:text="Settings"
+        android:padding="2dp"
+        android:layout_margin="10dp"
         android:fontFamily="@font/roboto_bold"
         android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="23sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_rv"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notiticationTitle"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_settings_layout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

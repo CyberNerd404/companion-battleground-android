@@ -1,34 +1,29 @@
 package com.cybernerd.companionBattleground.view.setting
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
+import com.cybernerd.companionBattleground.adapter.SettingsAdapter
+import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
+import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.WallpaperModel
+import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.view.BaseFragment
+import com.cybernerd.companionBattleground.view.home.news.NewsActivity
+import com.cybernerd.companionBattleground.view.home.wallpapers.WallpaperActivity
+import kotlinx.android.synthetic.main.fragment_setting.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SettingFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class SettingFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class SettingFragment : BaseFragment(), ClickListener {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+
+    lateinit var homeAdapter: SettingsAdapter
+    var settingStringList = arrayListOf<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +33,63 @@ class SettingFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_setting, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SettingFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SettingFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        homeAdapter = SettingsAdapter(requireContext(), this)
+        list_rv.adapter = homeAdapter
+
+
+        list_rv.layoutManager = GridLayoutManager(requireContext(), 1)
+        settingStringList.add(0,"Terms and Condition")
+        settingStringList.add(1,"Contact Us")
+        settingStringList.add(2,"Update App")
+        homeAdapter.setSettingsText(settingStringList)
+
+
+
+    }
+
+    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun homeVideoClickListener(videoMode: Videos) {
+        TODO("Not yet implemented")
+    }
+
+    override fun settingsClickListener(position: Int) {
+        when(position) {
+            0 -> {
+                activity.let {
+                    Intent(it, WallpaperActivity::class.java).apply {
+                        startActivity(this)
+                    }
                 }
             }
+            1 -> {
+                activity.let {
+                    Intent(it, NewsActivity::class.java).apply {
+                        startActivity(this)
+                    }
+                }
+            }
+
+
+            else -> activity.let {
+                Intent(it, NewsActivity::class.java).apply {
+                    startActivity(this)
+                }
+            }
+        }
     }
+
+    override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
+    }
+
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+        TODO("Not yet implemented")
+    }
+
 }
