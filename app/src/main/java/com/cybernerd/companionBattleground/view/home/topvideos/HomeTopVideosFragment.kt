@@ -77,5 +77,9 @@ class HomeTopVideosFragment : BaseFragment(), ClickListener {
         }
     }
 
+    override fun settingsClickListener(position: Int) {
+        TODO("Not yet implemented")
+    }
+
 
 }

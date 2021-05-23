@@ -68,5 +68,9 @@ class HomeFragment : BaseFragment(), ClickListener {
         TODO("Not yet implemented")
     }
 
+    override fun settingsClickListener(position: Int) {
+        TODO("Not yet implemented")
+    }
+
 
 }

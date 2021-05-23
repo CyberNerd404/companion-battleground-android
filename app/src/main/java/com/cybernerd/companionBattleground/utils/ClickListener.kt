@@ -11,4 +11,7 @@ interface ClickListener {
 
     // click listener for youtude recyclerview
     fun homeVideoClickListener(videoMode: Videos)
+
+    // click listener for settings recyclerview
+    fun settingsClickListener(position: Int)
 }
