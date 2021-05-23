@@ -1,34 +1,26 @@
 package com.cybernerd.companionBattleground.view.home.wallpapers
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
+import com.cybernerd.companionBattleground.adapter.ThemeAdapter
+import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
+import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.WallpaperModel
+import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.view.BaseFragment
+import kotlinx.android.synthetic.main.fragment_home_wallpaper.*
+import kotlinx.android.synthetic.main.fragment_setting.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class HomeWallpaperFragment : BaseFragment(),ClickListener {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeWallpaperFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class HomeWallpaperFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    lateinit var themeAdapter: ThemeAdapter
+    var wallpaperList = arrayListOf<WallpaperModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,23 +30,38 @@ class HomeWallpaperFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home_wallpaper, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeWallpaperFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeWallpaperFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        themeAdapter = ThemeAdapter(requireContext(), this)
+        wallpaper_rv.adapter = themeAdapter
+
+
+        wallpaper_rv.layoutManager = GridLayoutManager(requireContext(), 2)
+        wallpaperList.add(WallpaperModel("http://dreamicus.com/data/yellow/yellow-08.jpg","Hi"))
+        wallpaperList.add(WallpaperModel("https://hddesktopwallpapers.in/wp-content/uploads/2015/09/green-macro-flowers.jpg","Hi"))
+        wallpaperList.add(WallpaperModel("https://www.drodd.com/images16/green-color6.jpg","Hi"))
+        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","Hi"))
+        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","Hi"))
+        themeAdapter.setWallpaperGrid(wallpaperList)
+
+
+
+    }
+
+    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
+        TODO("Not yet implemented")
+    }
+
+    override fun homeVideoClickListener(videoMode: Videos) {
+        TODO("Not yet implemented")
+    }
+
+    override fun settingsClickListener(position: Int) {
+
+    }
+
+    override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
     }
 }

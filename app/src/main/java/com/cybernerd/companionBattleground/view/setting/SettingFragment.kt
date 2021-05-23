@@ -60,7 +60,7 @@ class SettingFragment : BaseFragment(), ClickListener {
         when(position) {
             0 -> {
                 activity.let {
-                    Intent(it, WallpaperActivity::class.java).apply {
+                    Intent(it, NewsActivity::class.java).apply {
                         startActivity(this)
                     }
                 }
