@@ -3,17 +3,14 @@
 
 <div align="left">
     <img src="app/resources/screen6.jpeg" width="300px"</img> 
+    <img src="app/resources/screen1.jpeg" width="300px"</img>
     <img src="app/resources/screen5.jpeg" width="300px"</img>
 </div>
 
 <div align="left">
     <img src="app/resources/screen4.jpeg" width="300px"</img> 
     <img src="app/resources/screen3.jpeg" width="300px"</img>
-</div>
-
-<div align="left">
     <img src="app/resources/screen2.jpeg" width="300px"</img> 
-    <img src="app/resources/screen1.jpeg" width="300px"</img>
 </div>
 
 
