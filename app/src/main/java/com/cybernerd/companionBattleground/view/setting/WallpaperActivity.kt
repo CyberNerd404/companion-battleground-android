@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.ThemeAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
@@ -42,6 +43,10 @@ class WallpaperActivity : AppCompatActivity() , ClickListener {
     }
 
     override fun settingsClickListener(position: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun notificationClickListener(notification: Notification) {
         TODO("Not yet implemented")
     }
 }

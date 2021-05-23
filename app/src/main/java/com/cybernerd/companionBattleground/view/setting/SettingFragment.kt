@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.SettingsAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
@@ -79,6 +80,10 @@ class SettingFragment : BaseFragment(), ClickListener {
                 }
             }
         }
+    }
+
+    override fun notificationClickListener(notification: Notification) {
+        TODO("Not yet implemented")
     }
 
 }

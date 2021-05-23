@@ -1,23 +1,16 @@
 package com.cybernerd.companionBattleground.view
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cybernerd.companionBattleground.R
-import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.home.HomeFragment
 import com.cybernerd.companionBattleground.view.information.InformationFragment
 import com.cybernerd.companionBattleground.view.notification.NotificationFragment
 import com.cybernerd.companionBattleground.view.setting.SettingFragment
-import com.google.android.gms.common.GoogleApiAvailabilityLight
-import com.google.android.gms.common.GooglePlayServicesRepairableException
-import com.google.firebase.messaging.FirebaseMessaging
-import com.google.firebase.messaging.FirebaseMessagingService
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity() {
 

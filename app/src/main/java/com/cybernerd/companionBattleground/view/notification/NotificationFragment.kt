@@ -1,10 +1,7 @@
 package com.cybernerd.companionBattleground.view.notification
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,6 +78,10 @@ class NotificationFragment : BaseFragment(), ClickListener {
     }
 
     override fun homeVideoClickListener(videoMode: Videos) {
+        TODO("Not yet implemented")
+    }
+
+    override fun settingsClickListener(position: Int) {
         TODO("Not yet implemented")
     }
 
