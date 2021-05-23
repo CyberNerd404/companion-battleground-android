@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.ViewPagerAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
@@ -65,6 +66,10 @@ class HomeFragment : BaseFragment(), ClickListener {
     }
 
     override fun homeVideoClickListener(videos: Videos) {
+        TODO("Not yet implemented")
+    }
+
+    override fun notificationClickListener(notification: Notification) {
         TODO("Not yet implemented")
     }
 

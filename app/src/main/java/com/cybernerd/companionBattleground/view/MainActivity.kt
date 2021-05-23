@@ -7,13 +7,19 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cybernerd.companionBattleground.R
+import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.home.HomeFragment
 import com.cybernerd.companionBattleground.view.information.InformationFragment
 import com.cybernerd.companionBattleground.view.notification.NotificationFragment
 import com.cybernerd.companionBattleground.view.setting.SettingFragment
+import com.google.android.gms.common.GoogleApiAvailabilityLight
+import com.google.android.gms.common.GooglePlayServicesRepairableException
+import com.google.firebase.messaging.FirebaseMessaging
+import com.google.firebase.messaging.FirebaseMessagingService
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private lateinit var navController: NavController
 
@@ -23,10 +29,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navController = findNavController(R.id.fragmentContainer)
-
-
         initBottomNavigation()
     }
+
 
     private fun initBottomNavigation() {
         val extras = intent.extras
@@ -55,5 +60,8 @@ class MainActivity : AppCompatActivity() {
         transaction.addToBackStack(null)
         transaction.commitAllowingStateLoss()
         supportFragmentManager.executePendingTransactions()
+
     }
+
+
 }

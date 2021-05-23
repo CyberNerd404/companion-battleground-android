@@ -27,7 +27,8 @@ class HomeNewsAdapter(private val context: Context, val clickListeners: ClickLis
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         val v =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_home_news_layout, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_home_news_layout, parent, false)
         return ViewHolder(v)
     }
 

@@ -11,6 +11,7 @@ import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.HomeNewsAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsListModel
 import com.cybernerd.companionBattleground.model.HomeNewsModel
+import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.utils.debug
@@ -75,6 +76,10 @@ class HomeNewsFragment : BaseFragment(), ClickListener {
     }
 
     override fun homeVideoClickListener(videos: Videos) {
+        TODO("Not yet implemented")
+    }
+
+    override fun notificationClickListener(notification: Notification) {
         TODO("Not yet implemented")
     }
 
