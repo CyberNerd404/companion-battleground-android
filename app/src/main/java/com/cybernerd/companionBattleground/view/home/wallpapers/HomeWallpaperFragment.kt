@@ -15,7 +15,6 @@ import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home_wallpaper.*
-import kotlinx.android.synthetic.main.fragment_setting.*
 
 class HomeWallpaperFragment : BaseFragment(),ClickListener {
 

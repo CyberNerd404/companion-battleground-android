@@ -15,6 +15,7 @@ import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
 import com.cybernerd.companionBattleground.view.home.news.NewsActivity
+import com.cybernerd.companionBattleground.view.home.wallpapers.WallpaperActivity
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 
@@ -61,7 +62,7 @@ class SettingFragment : BaseFragment(), ClickListener {
         when(position) {
             0 -> {
                 activity.let {
-                    Intent(it, NewsActivity::class.java).apply {
+                    Intent(it, WallpaperActivity::class.java).apply {
                         startActivity(this)
                     }
                 }
