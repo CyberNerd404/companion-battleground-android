@@ -47,17 +47,6 @@ class NotificationFragment : BaseFragment(), ClickListener {
 
         notification_rv.layoutManager = GridLayoutManager(requireContext(), 1)
 
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
-            }
-
-            // Get new FCM registration token
-            val token = task.result
-
-            // Log and toast
-        })
-
         viewModel.getNotifications()
         viewModel.liveData.observe(viewLifecycleOwner, Observer {
             notificationAdapter.setNotification(it)

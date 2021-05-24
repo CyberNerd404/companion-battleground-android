@@ -3,10 +3,12 @@ package com.cybernerd.companionBattleground.network
 import com.cybernerd.companionBattleground.model.HomeNewsListModel
 import com.cybernerd.companionBattleground.model.HomeVideosModel
 import com.cybernerd.companionBattleground.model.NotificationModel
+import com.cybernerd.companionBattleground.model.Token
+import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.GET
+import retrofit2.http.*
 
 const val BASE_URL = "https://companion-battleground.herokuapp.com/"
 interface CompanionApi {
@@ -30,5 +32,10 @@ interface CompanionApi {
 
     @GET("/api/v1/notifications")
     fun getNotifications(): Call<NotificationModel>
+
+
+    @Headers("Content-Type: application/json")
+    @POST("api/v1/device")
+    fun sendToken(@Body jsonObject: JsonObject): Call<Token>
 
 }

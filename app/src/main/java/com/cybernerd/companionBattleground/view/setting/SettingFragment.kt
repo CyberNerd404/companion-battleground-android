@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import com.cybernerd.companionBattleground.BuildConfig
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.SettingsAdapter
 import com.cybernerd.companionBattleground.model.HomeNewsModel
@@ -15,12 +16,14 @@ import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
 import com.cybernerd.companionBattleground.view.home.news.NewsActivity
+import com.cybernerd.companionBattleground.view.home.wallpapers.WallpaperActivity
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 
 class SettingFragment : BaseFragment(), ClickListener {
 
-
+    val versionName = BuildConfig.VERSION_NAME
+    val versionCode = BuildConfig.VERSION_CODE
     lateinit var homeAdapter: SettingsAdapter
     var settingStringList = arrayListOf<String>()
 
@@ -43,6 +46,7 @@ class SettingFragment : BaseFragment(), ClickListener {
         settingStringList.add(0,"Terms and Condition")
         settingStringList.add(1,"Contact Us")
         settingStringList.add(2,"Update App")
+        settingStringList.add(3, "Version: $versionName")
         homeAdapter.setSettingsText(settingStringList)
 
 
@@ -61,7 +65,7 @@ class SettingFragment : BaseFragment(), ClickListener {
         when(position) {
             0 -> {
                 activity.let {
-                    Intent(it, NewsActivity::class.java).apply {
+                    Intent(it, WallpaperActivity::class.java).apply {
                         startActivity(this)
                     }
                 }
