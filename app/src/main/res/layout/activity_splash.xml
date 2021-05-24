@@ -11,8 +11,8 @@
         android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/battleground_logo"
-        android:background="@color/black"
+        android:src="@mipmap/ic_launcher"
+        android:background="@color/ic_launcher2_background"
         />
 
 
