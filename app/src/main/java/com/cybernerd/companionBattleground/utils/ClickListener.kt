@@ -21,6 +21,6 @@ interface ClickListener {
     fun notificationClickListener(notification: Notification)
 
     // click listener for wallpaper
-    fun wallpaperClickListener(wallpaperModel: WallpaperModel)
+    fun wallpaperClickListener(wallpaperModel: WallpaperModel, position: Int)
 
 }

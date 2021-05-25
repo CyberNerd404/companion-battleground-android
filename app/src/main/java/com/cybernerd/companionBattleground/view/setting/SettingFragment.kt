@@ -91,7 +91,7 @@ class SettingFragment : BaseFragment(), ClickListener {
         TODO("Not yet implemented")
     }
 
-    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel, position: Int) {
         TODO("Not yet implemented")
     }
 

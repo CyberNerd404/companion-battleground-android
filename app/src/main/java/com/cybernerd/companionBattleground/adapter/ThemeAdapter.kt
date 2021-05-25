@@ -62,7 +62,7 @@ class ThemeAdapter(private val context: Context, val clickListeners: ClickListen
             })
 
         holder.itemView.setOnClickListener {
-            clickListeners.wallpaperClickListener(list[position])
+            clickListeners.wallpaperClickListener(list[position], position)
         }
     }
 
