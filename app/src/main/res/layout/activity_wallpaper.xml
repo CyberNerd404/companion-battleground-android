@@ -22,13 +22,13 @@
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager2"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="0dp"
         android:paddingStart="50dp"
         android:paddingEnd="50dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/back_wallpaper" />
 
 
     <TextView
@@ -54,35 +54,48 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <Button
-            android:id="@+id/set_button"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="Set"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
 
-        <Button
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_wallpaper"
+                app:tint="@color/pubg_color" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="SET"
+                android:textColor="@color/pubg_color"/>
+
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/download_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="download"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_weight="1">
 
-        <Button
-            android:id="@+id/share_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:fontFamily="@font/roboto_regular"
-            android:text="share"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/ic_download_black"
+                app:tint="@color/pubg_color" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DOWNLOAD"
+                android:textColor="@color/pubg_color"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
 
 
     </LinearLayout>

@@ -38,11 +38,11 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
 
 
         wallpaper_rv.layoutManager = GridLayoutManager(requireContext(), 2)
-        wallpaperList.add(WallpaperModel("http://dreamicus.com/data/yellow/yellow-08.jpg","Hi"))
-        wallpaperList.add(WallpaperModel("https://hddesktopwallpapers.in/wp-content/uploads/2015/09/green-macro-flowers.jpg","Hi"))
-        wallpaperList.add(WallpaperModel("https://www.drodd.com/images16/green-color6.jpg","Hi"))
-        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","Hi"))
-        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","Hi"))
+        wallpaperList.add(WallpaperModel("http://dreamicus.com/data/yellow/yellow-08.jpg","1"))
+        wallpaperList.add(WallpaperModel("https://hddesktopwallpapers.in/wp-content/uploads/2015/09/green-macro-flowers.jpg","2"))
+        wallpaperList.add(WallpaperModel("https://www.drodd.com/images16/green-color6.jpg","3"))
+        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","4"))
+        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","5"))
         themeAdapter.setWallpaperGrid(wallpaperList)
 
 
@@ -65,10 +65,11 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
         TODO("Not yet implemented")
     }
 
-    override fun wallpaperClickListener(wallpaperModel: WallpaperModel) {
+    override fun wallpaperClickListener(wallpaperModel: WallpaperModel, position: Int) {
         Intent(requireContext(), WallpaperActivity::class.java).apply {
             putExtra("imageUrl", wallpaperModel.imageLink)
             putExtra("imageTitle", wallpaperModel.title)
+            putExtra("positionWallpaper", position)
             startActivity(this)
         }
     }

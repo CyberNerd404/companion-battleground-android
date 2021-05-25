@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,9 +16,13 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.WallpaperSliderAdapter
 import com.cybernerd.companionBattleground.model.WallpaperModel
+import com.cybernerd.companionBattleground.utils.debug
 import kotlinx.android.synthetic.main.activity_wallpaper.*
 import java.io.BufferedOutputStream
 
@@ -25,6 +30,7 @@ import java.io.BufferedOutputStream
 class WallpaperActivity : AppCompatActivity() {
     var imgLink = ""
     var imageTitle = ""
+    var position = -1
     var wallpaperList: MutableList<WallpaperModel> = arrayListOf()
     var wallpaperSliderAdapter: WallpaperSliderAdapter = WallpaperSliderAdapter(this)
 
@@ -34,14 +40,15 @@ class WallpaperActivity : AppCompatActivity() {
         setContentView(R.layout.activity_wallpaper)
 
         val intent = intent.extras
+        position = intent?.getInt("positionWallpaper") ?: -1
         imgLink = intent?.getString("imageUrl").toString()
         imageTitle = intent?.getString("imageTitle").toString()
 
-        wallpaperList.add(WallpaperModel("http://dreamicus.com/data/yellow/yellow-08.jpg","Hi"))
-        wallpaperList.add(WallpaperModel("https://hddesktopwallpapers.in/wp-content/uploads/2015/09/green-macro-flowers.jpg","Hi"))
-        wallpaperList.add(WallpaperModel("https://www.drodd.com/images16/green-color6.jpg","Hi"))
-        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","Hi"))
-        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","Hi"))
+        wallpaperList.add(WallpaperModel("http://dreamicus.com/data/yellow/yellow-08.jpg","1"))
+        wallpaperList.add(WallpaperModel("https://hddesktopwallpapers.in/wp-content/uploads/2015/09/green-macro-flowers.jpg","2"))
+        wallpaperList.add(WallpaperModel("https://www.drodd.com/images16/green-color6.jpg","3"))
+        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","4"))
+        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","5"))
 
         viewPager2.adapter = wallpaperSliderAdapter
         wallpaperSliderAdapter.setFullWallpaper(wallpaperList,viewPager2)
@@ -58,30 +65,34 @@ class WallpaperActivity : AppCompatActivity() {
             page.scaleY = 0.85f + r * 0.15f
         }
         viewPager2.setPageTransformer(compositePageTransformer)
+        viewPager2.currentItem = position
 
-//        Glide.with(this)
-//            .asBitmap()
-//            .load(imgLink)
-//            .into(object : CustomTarget<Bitmap>() {
-//                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+        download_button.setOnClickListener {
+            Glide.with(this)
+                .asBitmap()
+                .load(wallpaperList[viewPager2.currentItem].imageLink)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
 //                    wallpaper_iv_activity.setImageBitmap(resource)
 //                    download_button.setOnClickListener {
-//                        if(hasWriteStoragePermission()){
-//                            addImageToGallery(imageTitle, this@WallpaperActivity, resource)
-//                        }
-//
+                        if(hasWriteStoragePermission()){
+                            addImageToGallery(imageTitle, this@WallpaperActivity, resource)
+                        }
+
 //                    }
-////                    holder.itemView.text_background.background = Color.argb(255, redValue, greenValue, blueValue)
-//
-//                }
-//
-//                override fun onLoadCleared(placeholder: Drawable?) {
-//                    // this is called when imageView is cleared on lifecycle call or for
-//                    // some other reason.
-//                    // if you are referencing the bitmap somewhere else too other than this imageView
-//                    // clear it here as you can no longer have the bitmap
-//                }
-//            })
+//                    holder.itemView.text_background.background = Color.argb(255, redValue, greenValue, blueValue)
+
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                        // this is called when imageView is cleared on lifecycle call or for
+                        // some other reason.
+                        // if you are referencing the bitmap somewhere else too other than this imageView
+                        // clear it here as you can no longer have the bitmap
+                    }
+                })
+        }
+
 
         back_wallpaper.setOnClickListener {
             finish()
