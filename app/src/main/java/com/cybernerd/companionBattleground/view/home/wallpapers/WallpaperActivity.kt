@@ -1,6 +1,7 @@
 package com.cybernerd.companionBattleground.view.home.wallpapers
 
 import android.Manifest
+import android.app.WallpaperManager
 import android.content.ContentValues
 import android.content.Context
 import android.content.pm.PackageManager
@@ -10,6 +11,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +25,8 @@ import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.WallpaperSliderAdapter
 import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.debug
+import com.cybernerd.companionBattleground.utils.showToast
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_wallpaper.*
 import java.io.BufferedOutputStream
 
@@ -44,18 +48,75 @@ class WallpaperActivity : AppCompatActivity() {
         imgLink = intent?.getString("imageUrl").toString()
         imageTitle = intent?.getString("imageTitle").toString()
 
-        wallpaperList.add(WallpaperModel("http://dreamicus.com/data/yellow/yellow-08.jpg","1"))
-        wallpaperList.add(WallpaperModel("https://hddesktopwallpapers.in/wp-content/uploads/2015/09/green-macro-flowers.jpg","2"))
-        wallpaperList.add(WallpaperModel("https://www.drodd.com/images16/green-color6.jpg","3"))
-        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","4"))
-        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","5"))
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource1.jpeg",
+                "1"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource2.jpeg",
+                "2"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource3.jpeg",
+                "3"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource4.jpeg",
+                "4"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource5.jpeg",
+                "5"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource2.jpeg",
+                "6"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource4.jpeg",
+                "7"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource1.jpeg",
+                "8"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource5.jpeg",
+                "9"
+            )
+        )
+        wallpaperList.add(
+            WallpaperModel(
+                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource3.jpeg",
+                "10"
+            )
+        )
 
         viewPager2.adapter = wallpaperSliderAdapter
-        wallpaperSliderAdapter.setFullWallpaper(wallpaperList,viewPager2)
+        wallpaperSliderAdapter.setFullWallpaper(wallpaperList, viewPager2)
         viewPager2.clipToPadding = false
         viewPager2.clipChildren = false
         viewPager2.offscreenPageLimit = 3
         viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+        val wallpaperManager = WallpaperManager.getInstance(this)
 
 
         val compositePageTransformer = CompositePageTransformer()
@@ -72,11 +133,15 @@ class WallpaperActivity : AppCompatActivity() {
                 .asBitmap()
                 .load(wallpaperList[viewPager2.currentItem].imageLink)
                 .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
 //                    wallpaper_iv_activity.setImageBitmap(resource)
 //                    download_button.setOnClickListener {
-                        if(hasWriteStoragePermission()){
-                            addImageToGallery(imageTitle, this@WallpaperActivity, resource)
+                        if (hasWriteStoragePermission()) {
+                                wallpaper_progress_bar.visibility = View.VISIBLE
+                                    addImageToGallery(imageTitle, this@WallpaperActivity, resource)
                         }
 
 //                    }
@@ -93,57 +158,82 @@ class WallpaperActivity : AppCompatActivity() {
                 })
         }
 
+        set_wallpaper_iv.setOnClickListener {
+            Glide.with(this)
+                .asBitmap()
+                .load(wallpaperList[viewPager2.currentItem].imageLink)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(resource: Bitmap,transition: Transition<in Bitmap>?) {
+                        wallpaperManager.setBitmap(resource)
+                        showToast(this@WallpaperActivity, "Wallpaper Set Successfully")
+                    }
 
-        back_wallpaper.setOnClickListener {
-            finish()
-        }
-
-
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                        // this is called when imageView is cleared on lifecycle call or for
+                        // some other reason.
+                        // if you are referencing the bitmap somewhere else too other than this imageView
+                        // clear it here as you can no longer have the bitmap
+                    }
+                })
 
     }
-    private fun hasWriteStoragePermission(): Boolean {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            return true
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    1
-                )
 
-                return false
-            }
-        }
 
+    back_wallpaper.setOnClickListener{
+        finish()
+    }
+
+
+}
+
+private fun hasWriteStoragePermission(): Boolean {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         return true
+    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            requestPermissions(
+                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                1
+            )
+
+            return false
+        }
     }
 
-    fun addImageToGallery(
-        fileName: String,
-        context: Context,
-        bitmap: Bitmap
-    ) {
+    return true
+}
 
-        val values = ContentValues()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
-        }
-        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-        values.put(MediaStore.Images.ImageColumns.DISPLAY_NAME, fileName)
-        values.put(MediaStore.Images.ImageColumns.TITLE, fileName)
+fun addImageToGallery(
+    fileName: String,
+    context: Context,
+    bitmap: Bitmap
+) {
 
-        val uri: Uri? = context.contentResolver.insert(
-            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-            values
-        )
-        uri?.let {
-            context.contentResolver.openOutputStream(uri)?.let { stream ->
-                val oStream =
-                    BufferedOutputStream(stream)
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, oStream)
-                oStream.close()
-            }
-        }
-
+    val values = ContentValues()
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
     }
+    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+    values.put(MediaStore.Images.ImageColumns.DISPLAY_NAME, fileName)
+    values.put(MediaStore.Images.ImageColumns.TITLE, fileName)
+
+    val uri: Uri? = context.contentResolver.insert(
+        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+        values
+    )
+    uri?.let {
+        context.contentResolver.openOutputStream(uri)?.let { stream ->
+            val oStream =
+                BufferedOutputStream(stream)
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, oStream)
+            oStream.close()
+        }
+    }
+    wallpaper_progress_bar.visibility = View.GONE
+
+}
 }

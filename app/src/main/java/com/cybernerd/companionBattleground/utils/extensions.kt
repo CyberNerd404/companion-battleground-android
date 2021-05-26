@@ -1,6 +1,8 @@
 package com.cybernerd.companionBattleground.utils
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 
 
 fun debug(message: String) {
@@ -14,3 +16,9 @@ fun validate(message: String){
 fun errorDebug(message: String) {
     Log.d("error", message)
 }
+
+fun showToast(context: Context, message: String){
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+}
+
+

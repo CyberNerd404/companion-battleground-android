@@ -38,11 +38,21 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
 
 
         wallpaper_rv.layoutManager = GridLayoutManager(requireContext(), 2)
-        wallpaperList.add(WallpaperModel("http://dreamicus.com/data/yellow/yellow-08.jpg","1"))
-        wallpaperList.add(WallpaperModel("https://hddesktopwallpapers.in/wp-content/uploads/2015/09/green-macro-flowers.jpg","2"))
-        wallpaperList.add(WallpaperModel("https://www.drodd.com/images16/green-color6.jpg","3"))
-        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","4"))
-        wallpaperList.add(WallpaperModel("https://wonderfulengineering.com/wp-content/uploads/2016/02/mobile-wallpaper-3.jpg","5"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource1.jpeg","1"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource2.jpeg","2"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource3.jpeg","3"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource4.jpeg","4"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource5.jpeg","5"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource2.jpeg","6"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource4.jpeg","7"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource1.jpeg","8"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource5.jpeg","9"))
+        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource3.jpeg","10"))
+
+
+
+
+
         themeAdapter.setWallpaperGrid(wallpaperList)
 
 
