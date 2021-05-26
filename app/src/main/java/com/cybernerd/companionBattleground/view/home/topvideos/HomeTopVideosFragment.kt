@@ -87,6 +87,10 @@ class HomeTopVideosFragment : BaseFragment(), ClickListener {
         TODO("Not yet implemented")
     }
 
+    override fun informationCategoryClickListener() {
+        TODO("Not yet implemented")
+    }
+
     override fun settingsClickListener(position: Int) {
         TODO("Not yet implemented")
     }

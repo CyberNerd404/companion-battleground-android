@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.SET_WALLPAPER" />
 
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,7 +15,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CompanionBattleGroundIndia">
-        <activity android:name=".view.home.wallpapers.WallpaperActivity"></activity>
+        <activity android:name=".ComingSoonActivity"></activity>
+        <activity android:name=".view.home.wallpapers.WallpaperActivity" />
         <activity android:name=".view.home.topvideos.VideoActivity" />
         <activity android:name=".view.home.news.NewsActivity" />
         <activity android:name=".view.SplashActivity">
