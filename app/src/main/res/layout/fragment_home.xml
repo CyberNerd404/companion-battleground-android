@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/explore_tv"
         app:tabIndicator="@color/red"
-        app:tabIndicatorColor="@color/white"
+        app:tabIndicatorColor="@color/pubg_color"
         app:tabIndicatorHeight="1dp"
         app:tabTextColor="@color/tab_text_color"/>
 

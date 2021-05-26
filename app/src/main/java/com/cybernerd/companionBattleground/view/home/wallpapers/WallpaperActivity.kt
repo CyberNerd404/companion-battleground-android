@@ -235,6 +235,7 @@ fun addImageToGallery(
             oStream.close()
         }
     }
+    showToast(context, "Image Downloaded Successfully")
     wallpaper_progress_bar.visibility = View.GONE
 
 }
