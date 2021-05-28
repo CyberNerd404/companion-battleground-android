@@ -37,7 +37,7 @@ class HomeFragment : BaseFragment(), ClickListener {
 
         viewPager.adapter = viewPagerAdapter
 
-        viewPager.isUserInputEnabled = false
+        viewPager.isUserInputEnabled = true
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
 

@@ -17,7 +17,7 @@
             android:id="@+id/full_wallpaper_iv"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/battleground_logo"
+            android:src="@drawable/app_background_img"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:scaleType="centerCrop"/>

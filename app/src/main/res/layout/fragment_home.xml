@@ -7,19 +7,6 @@
     tools:context=".view.home.HomeFragment">
 
 
-    <TextView
-        android:id="@+id/explore_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/roboto_bold"
-        android:text="Home Explore"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
@@ -28,7 +15,7 @@
         android:background="#0DFFFFFF"
         android:textAlignment="viewStart"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/explore_tv"
+        app:layout_constraintTop_toTopOf="parent"
         app:tabIndicator="@color/red"
         app:tabIndicatorColor="@color/pubg_color"
         app:tabIndicatorHeight="1dp"
