@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.cybernerd.companionBattleground.R
@@ -41,6 +42,7 @@ class ThemeAdapter(private val context: Context, val clickListeners: WallpaperLi
         Glide.with(this.context)
             .asBitmap()
             .load(list[position].image)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(object : CustomTarget<Bitmap>(){
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     holder.itemView.wallpaper_iv.setImageBitmap(resource)

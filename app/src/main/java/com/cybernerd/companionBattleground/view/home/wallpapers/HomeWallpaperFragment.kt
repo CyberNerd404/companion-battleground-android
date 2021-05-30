@@ -64,7 +64,7 @@ class HomeWallpaperFragment : BaseFragment(), WallpaperListener {
             putExtra("imageUrl", wallpaper.image)
             putExtra("imageTitle", wallpaper.credit)
             putExtra("positionWallpaper", position)
-
+            startActivity(this)
         }
     }
 }
