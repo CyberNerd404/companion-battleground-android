@@ -16,32 +16,25 @@ class ComingSoonActivity : AppCompatActivity() {
         when (selectionValue) {
 
             0 -> {
-                placeholder_screen.setImageResource(R.drawable.bg1)
-                screenTitle.text = "Map"
+                coming_soon_text.text = "Map are currently unavailable, We'll update it once Battleground Mobile India is released"
             }
             1 -> {
-                placeholder_screen.setImageResource(R.drawable.bg2)
-                screenTitle.text = "Guns"
+                coming_soon_text.text = "Guns are currently unavailable, We'll update it once Battleground Mobile India is released"
             }
             2 -> {
-                placeholder_screen.setImageResource(R.drawable.bg3)
-                screenTitle.text = "Tips & Tricks"
+                coming_soon_text.text = "Tips & Tricks are currently unavailable, We'll update it once Battleground Mobile India is released"
             }
             3 -> {
-                placeholder_screen.setImageResource(R.drawable.bg4)
-                screenTitle.text = "Top Ranking"
+                coming_soon_text.text = "Top Ranking are currently unavailable, We'll update it once Battleground Mobile India is released"
             }
             4 -> {
-                placeholder_screen.setImageResource(R.drawable.bg5)
-                screenTitle.text = "Damage Calculator"
+                coming_soon_text.text = "Damage Calculator are currently unavailable, We'll update it once Battleground Mobile India is released"
             }
             5 -> {
-                placeholder_screen.setImageResource(R.drawable.bg1)
-                screenTitle.text = "Sound"
+                coming_soon_text.text = "Sound are currently unavailable, We'll update it once Battleground Mobile India is released"
             }
             else -> {
-                placeholder_screen.setImageResource(R.drawable.bg2)
-                screenTitle.text = "Map"
+                coming_soon_text.text = "Map are currently unavailable, We'll update it once Battleground Mobile India is released"
             }
         }
     }
