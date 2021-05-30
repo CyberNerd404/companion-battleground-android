@@ -17,23 +17,20 @@ import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
-import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.ORIENTATION_HORIZONTAL
-import androidx.viewpager2.widget.ViewPager2.ORIENTATION_VERTICAL
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.WallpaperSliderAdapter
 import com.cybernerd.companionBattleground.model.WallpaperModel
+import com.cybernerd.companionBattleground.utils.ActionBottomSheetDialog
 import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.utils.showToast
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_wallpaper.*
 import java.io.BufferedOutputStream
 
 
-class WallpaperActivity : AppCompatActivity() {
+class WallpaperActivity : AppCompatActivity(),ActionBottomSheetDialog.ItemClickListener {
     var imgLink = ""
     var imageTitle = ""
     var position = -1
@@ -138,18 +135,12 @@ class WallpaperActivity : AppCompatActivity() {
                 .into(object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(
                         resource: Bitmap,
-                        transition: Transition<in Bitmap>?
+                        transition: Transition<in Bitmap>?,
                     ) {
-//                    wallpaper_iv_activity.setImageBitmap(resource)
-//                    download_button.setOnClickListener {
                         if (hasWriteStoragePermission()) {
                             wallpaper_progress_bar.visibility = View.VISIBLE
                             addImageToGallery(imageTitle, this@WallpaperActivity, resource)
                         }
-
-//                    }
-//                    holder.itemView.text_background.background = Color.argb(255, redValue, greenValue, blueValue)
-
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) {
@@ -160,12 +151,10 @@ class WallpaperActivity : AppCompatActivity() {
                     }
                 })
         }
-
-        set_wallpaper_iv.setOnClickListener {
-            setAsWallaper()
-            linearLayoutWallpaper.visibility = View.VISIBLE
-            linearLayout.visibility = View.GONE
-        }
+        set_wallpaper_iv.setOnClickListener(View.OnClickListener {
+            val openBottomSheet = ActionBottomSheetDialog.newInstance()
+            openBottomSheet.show(supportFragmentManager, ActionBottomSheetDialog.TAG)
+        })
 
 
         back_wallpaper.setOnClickListener {
@@ -175,56 +164,6 @@ class WallpaperActivity : AppCompatActivity() {
 
     }
 
-    private fun setAsWallaper() {
-        home_screen.setOnClickListener {
-            Glide.with(this)
-                .asBitmap()
-                .load(wallpaperList[viewPager2.currentItem].imageLink)
-                .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap,transition: Transition<in Bitmap>?) {
-//                        wallpaperManager.setBitmap(resource)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            wallpaperManager.setBitmap(resource,null,true,WallpaperManager.FLAG_SYSTEM)
-                        }
-                        showToast(this@WallpaperActivity, "Home Wallpaper Set Successfully")
-                        linearLayoutWallpaper.visibility = View.GONE
-                        linearLayout.visibility = View.VISIBLE
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        // this is called when imageView is cleared on lifecycle call or for
-                        // some other reason.
-                        // if you are referencing the bitmap somewhere else too other than this imageView
-                        // clear it here as you can no longer have the bitmap
-                    }
-                })
-        }
-
-        lock_screen.setOnClickListener {
-            Glide.with(this)
-                .asBitmap()
-                .load(wallpaperList[viewPager2.currentItem].imageLink)
-                .into(object : CustomTarget<Bitmap>() {
-                    override fun onResourceReady(resource: Bitmap,transition: Transition<in Bitmap>?) {
-//                        wallpaperManager.setBitmap(resource)
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            wallpaperManager.setBitmap(resource,null,true,WallpaperManager.FLAG_LOCK)
-                        }
-                        showToast(this@WallpaperActivity, "Lock Screen Wallpaper Set Successfully")
-                        linearLayoutWallpaper.visibility = View.GONE
-                        linearLayout.visibility = View.VISIBLE
-                    }
-
-                    override fun onLoadCleared(placeholder: Drawable?) {
-                        // this is called when imageView is cleared on lifecycle call or for
-                        // some other reason.
-                        // if you are referencing the bitmap somewhere else too other than this imageView
-                        // clear it here as you can no longer have the bitmap
-                    }
-                })
-        }
-
-    }
 
     private fun hasWriteStoragePermission(): Boolean {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -250,7 +189,7 @@ class WallpaperActivity : AppCompatActivity() {
     fun addImageToGallery(
         fileName: String,
         context: Context,
-        bitmap: Bitmap
+        bitmap: Bitmap,
     ) {
 
         val values = ContentValues()
@@ -276,5 +215,63 @@ class WallpaperActivity : AppCompatActivity() {
         showToast(context, "Image Downloaded Successfully")
         wallpaper_progress_bar.visibility = View.GONE
 
+    }
+
+    override fun onItemClick(item: String?) {
+
+        Glide.with(this)
+            .asBitmap()
+            .load(wallpaperList[viewPager2.currentItem].imageLink)
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    when (item) {
+                        "Set as Home Screen" -> {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                wallpaperManager.setBitmap(resource,
+                                    null,
+                                    true,
+                                    WallpaperManager.FLAG_SYSTEM)
+                                showToast(this@WallpaperActivity, "Home Wallpaper Set Successfully")
+                            }
+
+                        }
+                        "Set as Lock Screen" -> {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                wallpaperManager.setBitmap(resource,
+                                    null,
+                                    true,
+                                    WallpaperManager.FLAG_LOCK)
+                                showToast(this@WallpaperActivity, "Lock Screen Wallpaper Set Successfully")
+                            }
+
+                        }
+                        else -> {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                wallpaperManager.setBitmap(resource,
+                                    null,
+                                    true,
+                                    WallpaperManager.FLAG_LOCK)
+                                wallpaperManager.setBitmap(resource,
+                                    null,
+                                    true,
+                                    WallpaperManager.FLAG_SYSTEM)
+
+                                showToast(this@WallpaperActivity, "Wallpaper Set Successfully")
+                            }
+                        }
+                    }
+
+                }
+
+                override fun onLoadCleared(placeholder: Drawable?) {
+                    // this is called when imageView is cleared on lifecycle call or for
+                    // some other reason.
+                    // if you are referencing the bitmap somewhere else too other than this imageView
+                    // clear it here as you can no longer have the bitmap
+                }
+            })
     }
 }
