@@ -37,20 +37,26 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onMessageReceived(response)
         val dataType = response.data.get("type")
         debug("show Response : ${response.data}")
-        showNotification(1)
+        val titleStr = response.data.get("title")
+        val desc = response.data.get("description")
+        if (titleStr != null && desc != null) {
+            showNotification(0, titleStr, desc)
+        }
 
     }
 
-    private fun showNotification(id: Int) {
+    private fun showNotification(id: Int, title: String, desc: String) {
         createNotificationChannel()
         val notificationIntent = Intent(this, MainActivity::class.java)
+        notificationIntent.putExtra("notification", "true")
         val pendingIntent: PendingIntent = PendingIntent.getActivity(this, id,notificationIntent, 0)
         val notification: Notification = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setContentTitle("")
-            .setContentText("")
+            .setContentTitle(title)
+            .setContentText(desc)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setOngoing(true)
+            .setContentIntent(pendingIntent)
             .build()
 
         val manager: NotificationManager = getSystemService(NotificationManager::class.java)
