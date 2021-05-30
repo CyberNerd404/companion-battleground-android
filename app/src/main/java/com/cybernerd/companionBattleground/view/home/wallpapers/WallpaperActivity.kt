@@ -39,6 +39,7 @@ class WallpaperActivity : AppCompatActivity() {
     var position = -1
     var wallpaperList: MutableList<WallpaperModel> = arrayListOf()
     var wallpaperSliderAdapter: WallpaperSliderAdapter = WallpaperSliderAdapter(this)
+    lateinit var wallpaperManager: WallpaperManager
 
     lateinit var bitMap: Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -118,7 +119,7 @@ class WallpaperActivity : AppCompatActivity() {
         viewPager2.offscreenPageLimit = 3
         viewPager2.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 
-        val wallpaperManager = WallpaperManager.getInstance(this)
+        wallpaperManager = WallpaperManager.getInstance(this)
 
 
         val compositePageTransformer = CompositePageTransformer()
@@ -142,8 +143,8 @@ class WallpaperActivity : AppCompatActivity() {
 //                    wallpaper_iv_activity.setImageBitmap(resource)
 //                    download_button.setOnClickListener {
                         if (hasWriteStoragePermission()) {
-                                wallpaper_progress_bar.visibility = View.VISIBLE
-                                    addImageToGallery(imageTitle, this@WallpaperActivity, resource)
+                            wallpaper_progress_bar.visibility = View.VISIBLE
+                            addImageToGallery(imageTitle, this@WallpaperActivity, resource)
                         }
 
 //                    }
@@ -161,13 +162,33 @@ class WallpaperActivity : AppCompatActivity() {
         }
 
         set_wallpaper_iv.setOnClickListener {
+            setAsWallaper()
+            linearLayoutWallpaper.visibility = View.VISIBLE
+            linearLayout.visibility = View.GONE
+        }
+
+
+        back_wallpaper.setOnClickListener {
+            finish()
+        }
+
+
+    }
+
+    private fun setAsWallaper() {
+        home_screen.setOnClickListener {
             Glide.with(this)
                 .asBitmap()
                 .load(wallpaperList[viewPager2.currentItem].imageLink)
                 .into(object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(resource: Bitmap,transition: Transition<in Bitmap>?) {
-                        wallpaperManager.setBitmap(resource)
-                        showToast(this@WallpaperActivity, "Wallpaper Set Successfully")
+//                        wallpaperManager.setBitmap(resource)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            wallpaperManager.setBitmap(resource,null,true,WallpaperManager.FLAG_SYSTEM)
+                        }
+                        showToast(this@WallpaperActivity, "Home Wallpaper Set Successfully")
+                        linearLayoutWallpaper.visibility = View.GONE
+                        linearLayout.visibility = View.VISIBLE
                     }
 
                     override fun onLoadCleared(placeholder: Drawable?) {
@@ -177,66 +198,83 @@ class WallpaperActivity : AppCompatActivity() {
                         // clear it here as you can no longer have the bitmap
                     }
                 })
+        }
+
+        lock_screen.setOnClickListener {
+            Glide.with(this)
+                .asBitmap()
+                .load(wallpaperList[viewPager2.currentItem].imageLink)
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(resource: Bitmap,transition: Transition<in Bitmap>?) {
+//                        wallpaperManager.setBitmap(resource)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            wallpaperManager.setBitmap(resource,null,true,WallpaperManager.FLAG_LOCK)
+                        }
+                        showToast(this@WallpaperActivity, "Lock Screen Wallpaper Set Successfully")
+                        linearLayoutWallpaper.visibility = View.GONE
+                        linearLayout.visibility = View.VISIBLE
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+                        // this is called when imageView is cleared on lifecycle call or for
+                        // some other reason.
+                        // if you are referencing the bitmap somewhere else too other than this imageView
+                        // clear it here as you can no longer have the bitmap
+                    }
+                })
+        }
 
     }
 
+    private fun hasWriteStoragePermission(): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            return true
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                requestPermissions(
+                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    1
+                )
 
-    back_wallpaper.setOnClickListener{
-        finish()
-    }
+                return false
+            }
+        }
 
-
-}
-
-private fun hasWriteStoragePermission(): Boolean {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         return true
-    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            requestPermissions(
-                arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                1
-            )
+    }
 
-            return false
+    fun addImageToGallery(
+        fileName: String,
+        context: Context,
+        bitmap: Bitmap
+    ) {
+
+        val values = ContentValues()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
         }
-    }
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        values.put(MediaStore.Images.ImageColumns.DISPLAY_NAME, fileName)
+        values.put(MediaStore.Images.ImageColumns.TITLE, fileName)
 
-    return true
-}
-
-fun addImageToGallery(
-    fileName: String,
-    context: Context,
-    bitmap: Bitmap
-) {
-
-    val values = ContentValues()
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
-    }
-    values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-    values.put(MediaStore.Images.ImageColumns.DISPLAY_NAME, fileName)
-    values.put(MediaStore.Images.ImageColumns.TITLE, fileName)
-
-    val uri: Uri? = context.contentResolver.insert(
-        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-        values
-    )
-    uri?.let {
-        context.contentResolver.openOutputStream(uri)?.let { stream ->
-            val oStream =
-                BufferedOutputStream(stream)
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, oStream)
-            oStream.close()
+        val uri: Uri? = context.contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            values
+        )
+        uri?.let {
+            context.contentResolver.openOutputStream(uri)?.let { stream ->
+                val oStream =
+                    BufferedOutputStream(stream)
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, oStream)
+                oStream.close()
+            }
         }
-    }
-    showToast(context, "Image Downloaded Successfully")
-    wallpaper_progress_bar.visibility = View.GONE
+        showToast(context, "Image Downloaded Successfully")
+        wallpaper_progress_bar.visibility = View.GONE
 
-}
+    }
 }

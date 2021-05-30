@@ -28,7 +28,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_wallpaper"/>
+        app:layout_constraintTop_toBottomOf="@+id/back_wallpaper" />
 
 
     <TextView
@@ -103,13 +103,71 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayoutWallpaper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:id="@+id/home_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_margin="10dp"
+            android:background="@drawable/setwallpaper_background"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Home Screen"
+                android:padding="5dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="22sp"
+                android:textColor="@color/pubg_color" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/lock_screen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/setwallpaper_background"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Lock Screen"
+                android:padding="5dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textSize="22sp"
+                android:textColor="@color/pubg_color" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
     <ProgressBar
         android:id="@+id/wallpaper_progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:visibility="gone"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

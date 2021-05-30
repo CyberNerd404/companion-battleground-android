@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CompanionBattleGroundIndia">
-        <activity android:name=".ComingSoonActivity"></activity>
+        <activity android:name=".view.setting.WebViewActivity"></activity>
+        <activity android:name=".ComingSoonActivity" />
         <activity android:name=".view.home.wallpapers.WallpaperActivity" />
         <activity android:name=".view.home.topvideos.VideoActivity" />
         <activity android:name=".view.home.news.NewsActivity" />
@@ -31,11 +32,20 @@
 
         <service
             android:name=".utils.MyFirebaseMessagingService"
-            android:exported="false">
+            android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <receiver
+            android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver"
+            android:exported="true"
+            android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

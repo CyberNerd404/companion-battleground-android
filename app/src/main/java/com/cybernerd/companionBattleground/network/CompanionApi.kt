@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
-const val BASE_URL = "https://companion-battleground.herokuapp.com/"
+const val BASE_URL = "https://bgmiguide.azurewebsites.net/"
 interface CompanionApi {
 
 

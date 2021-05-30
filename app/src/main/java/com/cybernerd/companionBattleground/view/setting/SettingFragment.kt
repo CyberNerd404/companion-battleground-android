@@ -1,6 +1,7 @@
 package com.cybernerd.companionBattleground.view.setting
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +17,6 @@ import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
 import com.cybernerd.companionBattleground.view.home.news.NewsActivity
-import com.cybernerd.companionBattleground.view.home.wallpapers.WallpaperActivity
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 
@@ -43,7 +43,7 @@ class SettingFragment : BaseFragment(), ClickListener {
 
 
         list_rv.layoutManager = GridLayoutManager(requireContext(), 1)
-        settingStringList.add(0,"Terms and Condition")
+        settingStringList.add(0,"Privacy Policy")
         settingStringList.add(1,"Contact Us")
         settingStringList.add(2,"Update App")
         settingStringList.add(3, "Version: $versionName")
@@ -65,14 +65,16 @@ class SettingFragment : BaseFragment(), ClickListener {
         when(position) {
             0 -> {
                 activity.let {
-                    Intent(it, WallpaperActivity::class.java).apply {
+                    Intent(it, WebViewActivity::class.java).apply {
+                        putExtra("url", "https://bgmiguide.azurewebsites.net/privacy-policy.html")
                         startActivity(this)
                     }
+                    }
                 }
-            }
             1 -> {
                 activity.let {
-                    Intent(it, NewsActivity::class.java).apply {
+                    Intent(it, WebViewActivity::class.java).apply {
+                        putExtra("url", "https://bgmiguide.azurewebsites.net/")
                         startActivity(this)
                     }
                 }
