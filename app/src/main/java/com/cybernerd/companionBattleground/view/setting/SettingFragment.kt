@@ -95,7 +95,7 @@ class SettingFragment : BaseFragment(), ClickListener {
         TODO("Not yet implemented")
     }
 
-    override fun informationCategoryClickListener() {
+    override fun informationCategoryClickListener(position: Int) {
         TODO("Not yet implemented")
     }
 

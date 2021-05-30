@@ -23,6 +23,6 @@ interface ClickListener {
     // click listener for wallpaper
     fun wallpaperClickListener(wallpaperModel: WallpaperModel, position: Int)
 
-    fun informationCategoryClickListener()
+    fun informationCategoryClickListener(position: Int)
 
 }

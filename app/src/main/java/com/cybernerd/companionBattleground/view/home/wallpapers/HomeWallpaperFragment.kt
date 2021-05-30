@@ -84,7 +84,7 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
         }
     }
 
-    override fun informationCategoryClickListener() {
+    override fun informationCategoryClickListener(position: Int) {
         TODO("Not yet implemented")
     }
 }

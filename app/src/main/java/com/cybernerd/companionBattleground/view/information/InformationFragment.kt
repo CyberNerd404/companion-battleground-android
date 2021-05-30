@@ -101,9 +101,10 @@ class InformationFragment : BaseFragment(), ClickListener {
         TODO("Not yet implemented")
     }
 
-    override fun informationCategoryClickListener() {
+    override fun informationCategoryClickListener(position: Int) {
         activity.let {
             Intent(it, ComingSoonActivity::class.java).apply {
+                putExtra("position", position)
                 startActivity(this)
             }
         }
