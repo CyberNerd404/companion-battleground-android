@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.ThemeAdapter
@@ -13,7 +14,10 @@ import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.BaseFragment
+import com.cybernerd.companionBattleground.view.home.topvideos.HomeVideoViewModel
+import kotlinx.android.synthetic.main.fragment_home_top_videos.*
 import kotlinx.android.synthetic.main.fragment_home_wallpaper.*
 
 class HomeWallpaperFragment : BaseFragment(),ClickListener {
@@ -21,6 +25,10 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
 
     lateinit var themeAdapter: ThemeAdapter
     var wallpaperList = arrayListOf<WallpaperModel>()
+
+    private val viewModel: HomeWallpaperViewModel by lazy {
+        HomeWallpaperViewModel()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +43,21 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
 
         themeAdapter = ThemeAdapter(requireContext(), this)
         wallpaper_rv.adapter = themeAdapter
+
+        viewModel.getWallpapers()
+        viewModel.wallpaperLiveData.observe(viewLifecycleOwner, Observer {
+            debug("HomeFragment : Wallpaper data = ${it.wallpapers}")
+            themeAdapter.setWallpaperGrid(it.wallpapers)
+        })
+
+        /*viewModel.showprogress.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                video_progressbar.visibility = View.VISIBLE
+            } else {
+                video_progressbar.visibility = View.GONE
+            }
+        })*/
+
 
 
         wallpaper_rv.layoutManager = GridLayoutManager(requireContext(), 2)

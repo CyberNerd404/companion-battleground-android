@@ -1,9 +1,6 @@
 package com.cybernerd.companionBattleground.network
 
-import com.cybernerd.companionBattleground.model.HomeNewsListModel
-import com.cybernerd.companionBattleground.model.HomeVideosModel
-import com.cybernerd.companionBattleground.model.NotificationModel
-import com.cybernerd.companionBattleground.model.Token
+import com.cybernerd.companionBattleground.model.*
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -32,6 +29,9 @@ interface CompanionApi {
 
     @GET("/api/v1/notifications")
     fun getNotifications(): Call<NotificationModel>
+
+    @GET("/api/v1/wallpapers")
+    fun getWallpapers(): Call<WallpapesModel>
 
 
     @Headers("Content-Type: application/json")

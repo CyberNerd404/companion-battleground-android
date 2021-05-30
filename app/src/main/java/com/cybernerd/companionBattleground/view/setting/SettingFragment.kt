@@ -79,15 +79,10 @@ class SettingFragment : BaseFragment(), ClickListener {
                     }
                 }
             }
-
-
             else -> activity.let {
-                Intent(it, NewsActivity::class.java).apply {
-                    startActivity(this)
                 }
             }
         }
-    }
 
     override fun notificationClickListener(notification: Notification) {
         TODO("Not yet implemented")

@@ -1,11 +1,11 @@
 package com.cybernerd.companionBattleground.adapter
 
-import android.R.attr.x
-import android.R.attr.y
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Color
+import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
+import android.util.Base64.DEFAULT
+import android.util.Base64.decode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,19 +14,19 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.cybernerd.companionBattleground.R
-import com.cybernerd.companionBattleground.model.WallpaperModel
+import com.cybernerd.companionBattleground.model.Wallpaper
+import com.cybernerd.companionBattleground.model.WallpapesModel
 import com.cybernerd.companionBattleground.utils.ClickListener
-import com.cybernerd.companionBattleground.utils.debug
 import kotlinx.android.synthetic.main.item_home_news_layout.view.*
 import kotlinx.android.synthetic.main.item_theme_grid_layout.view.*
+import java.util.*
 
 
 class ThemeAdapter(private val context: Context, val clickListeners: ClickListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var list: List<WallpaperModel> = arrayListOf()
+    var list: List<Wallpaper> = arrayListOf()
 
-
-    fun setWallpaperGrid(list: List<WallpaperModel>) {
+    fun setWallpaperGrid(list: List<Wallpaper>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -43,9 +43,17 @@ class ThemeAdapter(private val context: Context, val clickListeners: ClickListen
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val list = list[position]
+
+//        imageBytes = Base64.decode(imageString, Base64.DEFAULT)
+        var imageBytes = Base64.Decoder(list[position])
+        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length)
+        holder.itemView.wallpaper_iv.setImageBitmap(decodedImage)
+
+
         Glide.with(this.context)
             .asBitmap()
-            .load(list[position].imageLink)
+            .load(list.image)
             .into(object : CustomTarget<Bitmap>(){
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     holder.itemView.wallpaper_iv.setImageBitmap(resource)

@@ -1,6 +1,5 @@
 package com.cybernerd.companionBattleground.view.notification
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +14,6 @@ import com.cybernerd.companionBattleground.model.Videos
 import com.cybernerd.companionBattleground.model.WallpaperModel
 import com.cybernerd.companionBattleground.utils.ClickListener
 import com.cybernerd.companionBattleground.view.BaseFragment
-import com.cybernerd.companionBattleground.view.home.news.NewsActivity
-import com.cybernerd.companionBattleground.view.home.topvideos.VideoActivity
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.android.synthetic.main.fragment_home_news.*
 import kotlinx.android.synthetic.main.fragment_notification.*
 
 
@@ -77,7 +71,7 @@ class NotificationFragment : BaseFragment(), ClickListener {
 
     override fun notificationClickListener(notification: Notification) {
 
-        when (notification.type) {
+        /*when (notification.type) {
             "video" -> {
                 Intent(requireContext(), VideoActivity::class.java).apply {
                     putExtra("videoId", notification._id)
@@ -91,7 +85,7 @@ class NotificationFragment : BaseFragment(), ClickListener {
                 }
             }
 
-        }
+        }*/
 
 
     }
