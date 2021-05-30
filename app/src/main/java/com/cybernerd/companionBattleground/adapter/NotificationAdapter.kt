@@ -10,11 +10,11 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.model.NotificationModel
-import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.NotificationListener
 import kotlinx.android.synthetic.main.item_home_news_layout.view.*
 import kotlinx.android.synthetic.main.item_notification_layout.view.*
 
-class NotificationAdapter(private val context: Context, val clickListeners: ClickListener) :
+class NotificationAdapter(private val context: Context, val clickListeners: NotificationListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var list: List<Notification> = arrayListOf()
 
@@ -47,7 +47,7 @@ class NotificationAdapter(private val context: Context, val clickListeners: Clic
         holder.itemView.notification_description_tv.text = list[position].description
 
         holder.itemView.setOnClickListener {
-            clickListeners.notificationClickListener(list[position])
+            clickListeners.notificationListener(list[position])
         }
 
     }

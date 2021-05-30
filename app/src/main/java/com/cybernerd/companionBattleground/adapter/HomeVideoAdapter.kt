@@ -4,17 +4,15 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.createBitmap
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.Transformation
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.model.Videos
-import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.VideoListener
 import kotlinx.android.synthetic.main.item_home_video_layout.view.*
 
-class HomeVideoAdapter(private val context: Context, val clickListeners: ClickListener) :
+class HomeVideoAdapter(private val context: Context, val clickListeners: VideoListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var list: List<Videos> = arrayListOf()
 
@@ -45,7 +43,7 @@ class HomeVideoAdapter(private val context: Context, val clickListeners: ClickLi
         holder.itemView.youtube_title.text = list[position].title
 
         holder.itemView.setOnClickListener {
-            clickListeners.homeVideoClickListener(list[position])
+            clickListeners.videoListener(list[position])
         }
 
     }

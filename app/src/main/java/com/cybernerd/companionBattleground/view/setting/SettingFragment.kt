@@ -1,7 +1,6 @@
 package com.cybernerd.companionBattleground.view.setting
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,17 +9,12 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.BuildConfig
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.SettingsAdapter
-import com.cybernerd.companionBattleground.model.HomeNewsModel
-import com.cybernerd.companionBattleground.model.Notification
-import com.cybernerd.companionBattleground.model.Videos
-import com.cybernerd.companionBattleground.model.WallpaperModel
-import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.SettingListener
 import com.cybernerd.companionBattleground.view.BaseFragment
-import com.cybernerd.companionBattleground.view.home.news.NewsActivity
 import kotlinx.android.synthetic.main.fragment_setting.*
 
 
-class SettingFragment : BaseFragment(), ClickListener {
+class SettingFragment : BaseFragment(), SettingListener {
 
     val versionName = BuildConfig.VERSION_NAME
     val versionCode = BuildConfig.VERSION_CODE
@@ -29,7 +23,7 @@ class SettingFragment : BaseFragment(), ClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_setting, container, false)
@@ -43,34 +37,26 @@ class SettingFragment : BaseFragment(), ClickListener {
 
 
         list_rv.layoutManager = GridLayoutManager(requireContext(), 1)
-        settingStringList.add(0,"Privacy Policy")
-        settingStringList.add(1,"Contact Us")
-        settingStringList.add(2,"Update App")
+        settingStringList.add(0, "Privacy Policy")
+        settingStringList.add(1, "Contact Us")
+        settingStringList.add(2, "Update App")
         settingStringList.add(3, "Version: $versionName")
         homeAdapter.setSettingsText(settingStringList)
 
 
-
     }
 
-    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
-        TODO("Not yet implemented")
-    }
 
-    override fun homeVideoClickListener(videoMode: Videos) {
-        TODO("Not yet implemented")
-    }
-
-    override fun settingsClickListener(position: Int) {
-        when(position) {
+    override fun settingsListener(position: Int) {
+        when (position) {
             0 -> {
                 activity.let {
                     Intent(it, WebViewActivity::class.java).apply {
                         putExtra("url", "https://bgmiguide.azurewebsites.net/privacy-policy.html")
                         startActivity(this)
                     }
-                    }
                 }
+            }
             1 -> {
                 activity.let {
                     Intent(it, WebViewActivity::class.java).apply {
@@ -80,20 +66,7 @@ class SettingFragment : BaseFragment(), ClickListener {
                 }
             }
             else -> activity.let {
-                }
             }
         }
-
-    override fun notificationClickListener(notification: Notification) {
-        TODO("Not yet implemented")
     }
-
-    override fun wallpaperClickListener(wallpaperModel: WallpaperModel, position: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun informationCategoryClickListener(position: Int) {
-        TODO("Not yet implemented")
-    }
-
 }

@@ -2,10 +2,7 @@ package com.cybernerd.companionBattleground.adapter
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
-import android.util.Base64.DEFAULT
-import android.util.Base64.decode
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,14 +12,12 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.model.Wallpaper
-import com.cybernerd.companionBattleground.model.WallpapesModel
-import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.WallpaperListener
 import kotlinx.android.synthetic.main.item_home_news_layout.view.*
 import kotlinx.android.synthetic.main.item_theme_grid_layout.view.*
-import java.util.*
 
 
-class ThemeAdapter(private val context: Context, val clickListeners: ClickListener) :
+class ThemeAdapter(private val context: Context, val clickListeners: WallpaperListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var list: List<Wallpaper> = arrayListOf()
 
@@ -43,22 +38,12 @@ class ThemeAdapter(private val context: Context, val clickListeners: ClickListen
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val list = list[position]
-
-//        imageBytes = Base64.decode(imageString, Base64.DEFAULT)
-        var imageBytes = Base64.Decoder(list[position])
-        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length)
-        holder.itemView.wallpaper_iv.setImageBitmap(decodedImage)
-
-
         Glide.with(this.context)
             .asBitmap()
-            .load(list.image)
+            .load(list[position].image)
             .into(object : CustomTarget<Bitmap>(){
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     holder.itemView.wallpaper_iv.setImageBitmap(resource)
-
-//                    holder.itemView.text_background.background = Color.argb(255, redValue, greenValue, blueValue)
 
                 }
                 override fun onLoadCleared(placeholder: Drawable?) {
@@ -70,7 +55,7 @@ class ThemeAdapter(private val context: Context, val clickListeners: ClickListen
             })
 
         holder.itemView.setOnClickListener {
-            clickListeners.wallpaperClickListener(list[position], position)
+            clickListeners.wallpaperListener(list[position], position)
         }
     }
 

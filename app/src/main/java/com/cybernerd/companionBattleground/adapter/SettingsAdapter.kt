@@ -6,10 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.cybernerd.companionBattleground.R
-import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.SettingListener
 import kotlinx.android.synthetic.main.item_home_news_layout.view.*
 
-class SettingsAdapter(private val context: Context, val clickListeners: ClickListener) :
+class SettingsAdapter(private val context: Context, val clickListeners: SettingListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var list: List<String> = arrayListOf()
 
@@ -34,7 +34,7 @@ class SettingsAdapter(private val context: Context, val clickListeners: ClickLis
         holder.itemView.title_tv.text = list[position]
 
         holder.itemView.setOnClickListener {
-            clickListeners.settingsClickListener(position)
+            clickListeners.settingsListener(position)
         }
 
     }

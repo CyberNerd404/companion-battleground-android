@@ -10,10 +10,10 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.model.HomeNewsListModel
 import com.cybernerd.companionBattleground.model.HomeNewsModel
-import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.NewsListener
 import kotlinx.android.synthetic.main.item_home_news_layout.view.*
 
-class HomeNewsAdapter(private val context: Context, val clickListeners: ClickListener) :
+class HomeNewsAdapter(private val context: Context, val clickListeners: NewsListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var list: List<HomeNewsModel> = arrayListOf()
     var response: HomeNewsListModel = HomeNewsListModel(list)
@@ -45,7 +45,7 @@ class HomeNewsAdapter(private val context: Context, val clickListeners: ClickLis
         holder.itemView.title_tv.text = list[position].title
 
         holder.itemView.setOnClickListener {
-            clickListeners.homeNewsClickListener(list[position])
+            clickListeners.newsListener(list[position])
         }
 
     }

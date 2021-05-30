@@ -2,7 +2,6 @@ package com.cybernerd.companionBattleground.view.information
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +12,12 @@ import androidx.viewpager2.widget.ViewPager2
 import com.cybernerd.companionBattleground.ComingSoonActivity
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.InformationCategoryAdapter
-import com.cybernerd.companionBattleground.adapter.WallpaperSliderAdapter
-import com.cybernerd.companionBattleground.model.*
-import com.cybernerd.companionBattleground.utils.ClickListener
-import com.cybernerd.companionBattleground.utils.debug
+import com.cybernerd.companionBattleground.model.InformationModel
+import com.cybernerd.companionBattleground.utils.InformationListener
 import com.cybernerd.companionBattleground.view.BaseFragment
-import com.cybernerd.companionBattleground.view.home.news.NewsActivity
 import kotlinx.android.synthetic.main.activity_wallpaper.*
-import kotlinx.android.synthetic.main.fragment_home_top_videos.*
 
-class InformationFragment : BaseFragment(), ClickListener {
+class InformationFragment : BaseFragment(), InformationListener {
 
     var categoryList: MutableList<String> = arrayListOf()
     lateinit var categoryAdapter: InformationCategoryAdapter
@@ -81,27 +76,8 @@ class InformationFragment : BaseFragment(), ClickListener {
 
     }
 
-    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
-        TODO("Not yet implemented")
-    }
 
-    override fun homeVideoClickListener(videoMode: Videos) {
-        TODO("Not yet implemented")
-    }
-
-    override fun settingsClickListener(position: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun notificationClickListener(notification: Notification) {
-        TODO("Not yet implemented")
-    }
-
-    override fun wallpaperClickListener(wallpaperModel: WallpaperModel, position: Int) {
-        TODO("Not yet implemented")
-    }
-
-    override fun informationCategoryClickListener(position: Int) {
+    override fun informationCategoryListener(position: Int) {
         activity.let {
             Intent(it, ComingSoonActivity::class.java).apply {
                 putExtra("position", position)

@@ -9,18 +9,14 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.ThemeAdapter
-import com.cybernerd.companionBattleground.model.HomeNewsModel
-import com.cybernerd.companionBattleground.model.Notification
-import com.cybernerd.companionBattleground.model.Videos
+import com.cybernerd.companionBattleground.model.Wallpaper
 import com.cybernerd.companionBattleground.model.WallpaperModel
-import com.cybernerd.companionBattleground.utils.ClickListener
+import com.cybernerd.companionBattleground.utils.WallpaperListener
 import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.BaseFragment
-import com.cybernerd.companionBattleground.view.home.topvideos.HomeVideoViewModel
-import kotlinx.android.synthetic.main.fragment_home_top_videos.*
 import kotlinx.android.synthetic.main.fragment_home_wallpaper.*
 
-class HomeWallpaperFragment : BaseFragment(),ClickListener {
+class HomeWallpaperFragment : BaseFragment(), WallpaperListener {
 
 
     lateinit var themeAdapter: ThemeAdapter
@@ -32,7 +28,7 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_wallpaper, container, false)
@@ -43,6 +39,7 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
 
         themeAdapter = ThemeAdapter(requireContext(), this)
         wallpaper_rv.adapter = themeAdapter
+        wallpaper_rv.layoutManager = GridLayoutManager(requireContext(), 2)
 
         viewModel.getWallpapers()
         viewModel.wallpaperLiveData.observe(viewLifecycleOwner, Observer {
@@ -50,64 +47,24 @@ class HomeWallpaperFragment : BaseFragment(),ClickListener {
             themeAdapter.setWallpaperGrid(it.wallpapers)
         })
 
-        /*viewModel.showprogress.observe(viewLifecycleOwner, Observer {
+        viewModel.showprogress.observe(viewLifecycleOwner, Observer {
             if (it) {
-                video_progressbar.visibility = View.VISIBLE
+                wallpaper_progressbar.visibility = View.VISIBLE
             } else {
-                video_progressbar.visibility = View.GONE
+                wallpaper_progressbar.visibility = View.GONE
             }
-        })*/
-
-
-
-        wallpaper_rv.layoutManager = GridLayoutManager(requireContext(), 2)
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource1.jpeg","1"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource2.jpeg","2"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource3.jpeg","3"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource4.jpeg","4"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource5.jpeg","5"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource2.jpeg","6"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource4.jpeg","7"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource1.jpeg","8"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource5.jpeg","9"))
-        wallpaperList.add(WallpaperModel("https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource3.jpeg","10"))
-
-
-
-
-
-        themeAdapter.setWallpaperGrid(wallpaperList)
-
+        })
 
 
     }
 
-    override fun homeNewsClickListener(homeNewsModel: HomeNewsModel) {
-        TODO("Not yet implemented")
-    }
 
-    override fun homeVideoClickListener(videoMode: Videos) {
-        TODO("Not yet implemented")
-    }
-
-    override fun settingsClickListener(position: Int) {
-
-    }
-
-    override fun notificationClickListener(notification: Notification) {
-        TODO("Not yet implemented")
-    }
-
-    override fun wallpaperClickListener(wallpaperModel: WallpaperModel, position: Int) {
+    override fun wallpaperListener(wallpaper: Wallpaper, position: Int) {
         Intent(requireContext(), WallpaperActivity::class.java).apply {
-            putExtra("imageUrl", wallpaperModel.imageLink)
-            putExtra("imageTitle", wallpaperModel.title)
+            putExtra("imageUrl", wallpaper.image)
+            putExtra("imageTitle", wallpaper.credit)
             putExtra("positionWallpaper", position)
-            startActivity(this)
-        }
-    }
 
-    override fun informationCategoryClickListener(position: Int) {
-        TODO("Not yet implemented")
+        }
     }
 }
