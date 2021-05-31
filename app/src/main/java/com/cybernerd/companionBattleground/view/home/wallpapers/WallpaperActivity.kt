@@ -23,6 +23,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.WallpaperSliderAdapter
 import com.cybernerd.companionBattleground.model.WallpaperModel
+import com.cybernerd.companionBattleground.model.WallpapersModel
 import com.cybernerd.companionBattleground.utils.ActionBottomSheetDialog
 import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.utils.showToast
@@ -37,6 +38,7 @@ class WallpaperActivity : AppCompatActivity(),ActionBottomSheetDialog.ItemClickL
     var wallpaperList: MutableList<WallpaperModel> = arrayListOf()
     var wallpaperSliderAdapter: WallpaperSliderAdapter = WallpaperSliderAdapter(this)
     lateinit var wallpaperManager: WallpaperManager
+    lateinit var wallpaperObj : WallpapersModel
 
     lateinit var bitMap: Bitmap
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,72 +47,17 @@ class WallpaperActivity : AppCompatActivity(),ActionBottomSheetDialog.ItemClickL
 
         val intent = intent.extras
         position = intent?.getInt("positionWallpaper") ?: -1
-        imgLink = intent?.getString("imageUrl").toString()
-        imageTitle = intent?.getString("imageTitle").toString()
 
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource1.jpeg",
-                "1"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource2.jpeg",
-                "2"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource3.jpeg",
-                "3"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource4.jpeg",
-                "4"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource5.jpeg",
-                "5"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource2.jpeg",
-                "6"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource4.jpeg",
-                "7"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource1.jpeg",
-                "8"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource5.jpeg",
-                "9"
-            )
-        )
-        wallpaperList.add(
-            WallpaperModel(
-                "https://raw.githubusercontent.com/Ashutoshwahane/junk-data/main/resource3.jpeg",
-                "10"
-            )
-        )
+
+        wallpaperObj = intent?.getSerializable("wallpaperObj") as WallpapersModel
+
+        if (wallpaperObj != null) {
+            imgLink = wallpaperObj.wallpapers[position].image
+        }
+
 
         viewPager2.adapter = wallpaperSliderAdapter
-        wallpaperSliderAdapter.setFullWallpaper(wallpaperList, viewPager2)
+        wallpaperObj?.let { wallpaperSliderAdapter.setFullWallpaper(it.wallpapers, viewPager2) }
         viewPager2.clipToPadding = false
         viewPager2.clipChildren = false
         viewPager2.offscreenPageLimit = 3
@@ -221,7 +168,7 @@ class WallpaperActivity : AppCompatActivity(),ActionBottomSheetDialog.ItemClickL
 
         Glide.with(this)
             .asBitmap()
-            .load(wallpaperList[viewPager2.currentItem].imageLink)
+            .load(wallpaperObj.wallpapers[viewPager2.currentItem].image)
             .into(object : CustomTarget<Bitmap>() {
                 override fun onResourceReady(
                     resource: Bitmap,

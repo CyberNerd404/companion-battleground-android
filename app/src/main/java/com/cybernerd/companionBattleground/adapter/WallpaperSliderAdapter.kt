@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybernerd.companionBattleground.R
+import com.cybernerd.companionBattleground.model.Wallpaper
 import com.cybernerd.companionBattleground.model.WallpaperModel
 import kotlinx.android.synthetic.main.item_wallpaper_layout.view.*
 
@@ -17,10 +18,10 @@ import kotlinx.android.synthetic.main.item_wallpaper_layout.view.*
 class WallpaperSliderAdapter(private val context: Context) :
     RecyclerView.Adapter<WallpaperSliderAdapter.ViewHolder>() {
     lateinit var viewPager2: ViewPager2
-    var list: List<WallpaperModel> = arrayListOf()
+    var list: List<Wallpaper> = arrayListOf()
 
 
-    fun setFullWallpaper(list: List<WallpaperModel>, viewPager2: ViewPager2) {
+    fun setFullWallpaper(list: List<Wallpaper>, viewPager2: ViewPager2) {
         this.list = list
         this.viewPager2 = viewPager2
     }
@@ -41,7 +42,7 @@ class WallpaperSliderAdapter(private val context: Context) :
 
         holder.itemView.doOnLayout { // need this to make sure draweeView.width > 0
             Glide.with(context)
-                .load(list[position].imageLink)
+                .load(list[position].image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .override(
                     holder.itemView.width,

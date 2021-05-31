@@ -10,6 +10,7 @@ import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.NotificationAdapter
 import com.cybernerd.companionBattleground.model.Notification
 import com.cybernerd.companionBattleground.utils.NotificationListener
+import com.cybernerd.companionBattleground.utils.showToast
 import com.cybernerd.companionBattleground.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_notification.*
 
@@ -55,7 +56,7 @@ class NotificationFragment : BaseFragment(), NotificationListener {
     }
 
     override fun notificationListener(notification: Notification) {
-        TODO("Not yet implemented")
+        showToast(requireContext(), "Go to Home Screen")
     }
 
 }

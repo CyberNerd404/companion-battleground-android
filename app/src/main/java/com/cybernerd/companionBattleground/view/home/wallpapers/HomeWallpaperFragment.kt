@@ -11,10 +11,12 @@ import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.adapter.ThemeAdapter
 import com.cybernerd.companionBattleground.model.Wallpaper
 import com.cybernerd.companionBattleground.model.WallpaperModel
+import com.cybernerd.companionBattleground.model.WallpapersModel
 import com.cybernerd.companionBattleground.utils.WallpaperListener
 import com.cybernerd.companionBattleground.utils.debug
 import com.cybernerd.companionBattleground.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home_wallpaper.*
+import java.io.Serializable
 
 class HomeWallpaperFragment : BaseFragment(), WallpaperListener {
 
@@ -59,10 +61,9 @@ class HomeWallpaperFragment : BaseFragment(), WallpaperListener {
     }
 
 
-    override fun wallpaperListener(wallpaper: Wallpaper, position: Int) {
+    override fun wallpaperListener(wallpaper: WallpapersModel, position: Int) {
         Intent(requireContext(), WallpaperActivity::class.java).apply {
-            putExtra("imageUrl", wallpaper.image)
-            putExtra("imageTitle", wallpaper.credit)
+            putExtra("wallpaperObj", wallpaper as Serializable)
             putExtra("positionWallpaper", position)
             startActivity(this)
         }

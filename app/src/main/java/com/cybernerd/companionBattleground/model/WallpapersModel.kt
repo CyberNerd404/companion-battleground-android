@@ -1,5 +1,8 @@
 package com.cybernerd.companionBattleground.model
 
-data class WallpapesModel(
+import java.io.Serializable
+
+
+data class WallpapersModel(
     val wallpapers: List<Wallpaper>
-)
+): Serializable

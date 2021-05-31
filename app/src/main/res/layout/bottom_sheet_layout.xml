@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingBottom="8dp"
+    android:background="@color/dialogBackground"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
@@ -15,7 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="16sp"
-        android:textColor="@color/black"
+        android:textColor="@color/dialogText"
         android:padding="10dp"/>
     <TextView
         android:id="@+id/set_lock_screen"
@@ -28,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@id/set_home_screen"
         android:padding="10dp"
         android:textSize="16sp"
-        android:textColor="@color/black"  />
+        android:textColor="@color/dialogText"  />
     <TextView
         android:id="@+id/set_both_screen"
         android:layout_height="wrap_content"
@@ -40,5 +41,5 @@
         app:layout_constraintTop_toBottomOf="@id/set_lock_screen"
         android:textSize="16sp"
         android:padding="10dp"
-        android:textColor="@color/black"  />
+        android:textColor="@color/dialogText"  />
 </androidx.constraintlayout.widget.ConstraintLayout>

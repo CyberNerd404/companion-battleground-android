@@ -12,6 +12,10 @@
     <!-- Color for Bottom NavBar. -->
     <color name="nav_icon">#FF000000</color>
     <color name="tab_text_color">#FFFFFFFF</color>
+    <color name="dialogText">#ffffff</color>
+    <color name="dialogBackground">#000000</color>
+
+
 
     <color name="pubg_color">#DE8D00</color>
 </resources>

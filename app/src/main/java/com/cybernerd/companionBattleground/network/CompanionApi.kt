@@ -31,7 +31,7 @@ interface CompanionApi {
     fun getNotifications(): Call<NotificationModel>
 
     @GET("/api/v1/wallpapers")
-    fun getWallpapers(): Call<WallpapesModel>
+    fun getWallpapers(): Call<WallpapersModel>
 
 
     @Headers("Content-Type: application/json")

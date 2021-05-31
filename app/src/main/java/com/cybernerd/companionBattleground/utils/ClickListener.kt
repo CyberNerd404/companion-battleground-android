@@ -23,5 +23,5 @@ interface InformationListener{
 }
 
 interface WallpaperListener{
-    fun wallpaperListener(wallpaper: Wallpaper, position: Int)
+    fun wallpaperListener(wallpaper: WallpapersModel, position: Int)
 }

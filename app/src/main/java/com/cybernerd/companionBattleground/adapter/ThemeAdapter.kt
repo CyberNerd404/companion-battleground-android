@@ -13,6 +13,7 @@ import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
 import com.cybernerd.companionBattleground.R
 import com.cybernerd.companionBattleground.model.Wallpaper
+import com.cybernerd.companionBattleground.model.WallpapersModel
 import com.cybernerd.companionBattleground.utils.WallpaperListener
 import kotlinx.android.synthetic.main.item_home_news_layout.view.*
 import kotlinx.android.synthetic.main.item_theme_grid_layout.view.*
@@ -57,7 +58,7 @@ class ThemeAdapter(private val context: Context, val clickListeners: WallpaperLi
             })
 
         holder.itemView.setOnClickListener {
-            clickListeners.wallpaperListener(list[position], position)
+            clickListeners.wallpaperListener(WallpapersModel(list), position)
         }
     }
 
