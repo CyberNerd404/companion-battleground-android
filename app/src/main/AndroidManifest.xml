@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cybernerd.companionBattleground">
+    package="com.cybernerd.bgmiguide">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -16,22 +16,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CompanionBattleGroundIndia">
-        <activity android:name=".view.setting.WebViewActivity"></activity>
-        <activity android:name=".ComingSoonActivity" />
-        <activity android:name=".view.home.wallpapers.WallpaperActivity" />
-        <activity android:name=".view.home.topvideos.VideoActivity" />
-        <activity android:name=".view.home.news.NewsActivity" />
-        <activity android:name=".view.SplashActivity">
+        <activity android:name="com.cybernerd.bgmiguide.view.setting.WebViewActivity"></activity>
+        <activity android:name="com.cybernerd.bgmiguide.ComingSoonActivity" />
+        <activity android:name="com.cybernerd.bgmiguide.view.home.wallpapers.WallpaperActivity" />
+        <activity android:name="com.cybernerd.bgmiguide.view.home.topvideos.VideoActivity" />
+        <activity android:name="com.cybernerd.bgmiguide.view.home.news.NewsActivity" />
+        <activity android:name="com.cybernerd.bgmiguide.view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.MainActivity" />
+        <activity android:name="com.cybernerd.bgmiguide.view.MainActivity" />
 
         <service
-            android:name=".utils.MyFirebaseMessagingService"
+            android:name="com.cybernerd.bgmiguide.utils.MyFirebaseMessagingService"
             android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
