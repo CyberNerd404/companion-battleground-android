@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "793909277166",
-    "project_id": "cybernerd-android",
-    "storage_bucket": "cybernerd-android.appspot.com"
+    "project_number": "966823922771",
+    "project_id": "bgmi-guide-android",
+    "storage_bucket": "bgmi-guide-android.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:793909277166:android:a80a2bd94a1a16b99cdeff",
+        "mobilesdk_app_id": "1:966823922771:android:c579de062c0323fd8f8aa6",
         "android_client_info": {
-          "package_name": "com.cybernerd.companionBattleground"
+          "package_name": "com.cybernerd.bgmiguide"
         }
       },
       "oauth_client": [
         {
-          "client_id": "793909277166-1tkk2bcuujd224ekr87gi1tse3l3e6kc.apps.googleusercontent.com",
+          "client_id": "966823922771-obbujjrr3mibj2dqb43vmgva2sh3u8h4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBUw9tDjnzPpRNuPuB5JM_Tz6bcMCVFiAM"
+          "current_key": "AIzaSyAWOWzD-cFQn52uFz0fpbYR5NiNwSYyY4I"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "793909277166-1tkk2bcuujd224ekr87gi1tse3l3e6kc.apps.googleusercontent.com",
+              "client_id": "966823922771-obbujjrr3mibj2dqb43vmgva2sh3u8h4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

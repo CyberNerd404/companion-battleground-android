@@ -13,6 +13,8 @@
     <color name="nav_icon">#FF000000</color>
     <color name="tab_text_color">#FFFFFFFF</color>
 
+    <color name="dialogText">#000000</color>
+    <color name="dialogBackground">#ffffff</color>
 
     <color name="pubg_color">#DE8D00</color>
 

@@ -4,7 +4,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-tools:background="@drawable/app_background"
+tools:background="@drawable/app_background_img"
 tools:context=".view.home.wallpapers.HomeWallpaperFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,10 +12,20 @@ tools:context=".view.home.wallpapers.HomeWallpaperFragment">
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="5"
         tools:listitem="@layout/item_theme_grid_layout" />
+
+    <ProgressBar
+        android:id="@+id/wallpaper_progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
