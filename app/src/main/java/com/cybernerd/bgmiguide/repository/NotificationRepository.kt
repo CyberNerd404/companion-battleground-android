@@ -8,13 +8,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NotificationRepository {
+class NotificationRepository(val token: String) {
     val notificationLiveData = MutableLiveData<NotificationModel>()
     val showProgress = MutableLiveData<Boolean>()
 
     fun getNotifications(){
         showProgress.value = true
-        CompanionApi().getNotifications().enqueue(object : Callback<NotificationModel>{
+        CompanionApi().getNotifications(token).enqueue(object : Callback<NotificationModel>{
             override fun onResponse(
                 call: Call<NotificationModel>,
                 response: Response<NotificationModel>

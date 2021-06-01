@@ -8,11 +8,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
 const val BASE_URL = "https://bgmiguide.azurewebsites.net/"
+
 interface CompanionApi {
 
 
-    companion object{
-        operator fun invoke(): CompanionApi{
+    companion object {
+        operator fun invoke(): CompanionApi {
             return Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -22,20 +23,30 @@ interface CompanionApi {
     }
 
     @GET("/api/v1/videos")
-    fun getHomeVideos(): Call<HomeVideosModel>
+    fun getHomeVideos(
+        @Header("Authorization") token: String,
+    ): Call<HomeVideosModel>
+
 
     @GET("/api/v1/news")
-    fun getHomeNews(): Call<HomeNewsListModel>
+    fun getHomeNews(
+        @Header("Authorization") token: String,
+    ): Call<HomeNewsListModel>
 
     @GET("/api/v1/notifications")
-    fun getNotifications(): Call<NotificationModel>
+    fun getNotifications(
+        @Header("Authorization") token: String,
+    ): Call<NotificationModel>
 
     @GET("/api/v1/wallpapers")
-    fun getWallpapers(): Call<WallpapersModel>
+    fun getWallpapers(
+        @Header("Authorization") token: String,
+    ): Call<WallpapersModel>
 
 
     @Headers("Content-Type: application/json")
     @POST("api/v1/device")
-    fun sendToken(@Body jsonObject: JsonObject): Call<Token>
+    fun sendToken(
+        @Body jsonObject: JsonObject): Call<Token>
 
 }

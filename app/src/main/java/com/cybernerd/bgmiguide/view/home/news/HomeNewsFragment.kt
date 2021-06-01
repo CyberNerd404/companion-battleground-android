@@ -1,6 +1,8 @@
 package com.cybernerd.bgmiguide.view.home.news
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,12 +25,12 @@ class HomeNewsFragment : BaseFragment(), NewsListener {
     lateinit var homeAdapter: HomeNewsAdapter
 
     private val viewModel: HomeNewsViewModel by lazy {
-        HomeNewsViewModel()
+        HomeNewsViewModel(requireContext())
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_news, container, false)
@@ -42,6 +44,7 @@ class HomeNewsFragment : BaseFragment(), NewsListener {
 
 
         home_news_rv.layoutManager = GridLayoutManager(requireContext(), 1)
+
 
         viewModel.getNews()
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {

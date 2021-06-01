@@ -8,13 +8,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeNewsRepository {
+class HomeNewsRepository(val token: String) {
     val newsLiveData = MutableLiveData<HomeNewsListModel>()
     val showProgress = MutableLiveData<Boolean>()
 
     fun getNews(){
         showProgress.value = true
-        CompanionApi().getHomeNews().enqueue(object : Callback<HomeNewsListModel>{
+        CompanionApi().getHomeNews(token).enqueue(object : Callback<HomeNewsListModel>{
             override fun onResponse(
                 call: Call<HomeNewsListModel>,
                 response: Response<HomeNewsListModel>

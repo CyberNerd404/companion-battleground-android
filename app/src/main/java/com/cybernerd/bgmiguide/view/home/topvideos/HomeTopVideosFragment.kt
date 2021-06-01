@@ -21,7 +21,7 @@ class HomeTopVideosFragment : BaseFragment(), VideoListener {
 
     lateinit var homeAdapter: HomeVideoAdapter
     private val viewModel: HomeVideoViewModel by lazy {
-        HomeVideoViewModel()
+        HomeVideoViewModel(requireContext())
     }
 
     override fun onCreateView(

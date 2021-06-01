@@ -19,7 +19,7 @@ class NotificationFragment : BaseFragment(), NotificationListener {
 
     lateinit var notificationAdapter: NotificationAdapter
     val viewModel: NotificationViewModel by lazy {
-        NotificationViewModel()
+        NotificationViewModel(requireContext())
     }
 
     override fun onCreateView(

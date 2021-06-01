@@ -8,13 +8,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeWallpaperRepository {
+class HomeWallpaperRepository(val token: String) {
     val wallpaperLiveData = MutableLiveData<WallpapersModel>()
     val showProgress = MutableLiveData<Boolean>()
 
     fun getWallpaper() {
         showProgress.value = true
-        CompanionApi().getWallpapers().enqueue(object : Callback<WallpapersModel> {
+        CompanionApi().getWallpapers(token).enqueue(object : Callback<WallpapersModel> {
             override fun onResponse(
                 call: Call<WallpapersModel>,
                 response: Response<WallpapersModel>,

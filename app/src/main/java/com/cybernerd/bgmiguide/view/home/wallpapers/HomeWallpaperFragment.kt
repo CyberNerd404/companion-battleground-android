@@ -25,7 +25,7 @@ class HomeWallpaperFragment : BaseFragment(), WallpaperListener {
     var wallpaperList = arrayListOf<WallpaperModel>()
 
     private val viewModel: HomeWallpaperViewModel by lazy {
-        HomeWallpaperViewModel()
+        HomeWallpaperViewModel(requireContext())
     }
 
     override fun onCreateView(

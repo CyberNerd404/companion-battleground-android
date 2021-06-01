@@ -37,5 +37,10 @@ class VideoActivity : AppCompatActivity() {
         })
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+
+    }
+
 
 }

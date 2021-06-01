@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="#B3000000"
-        app:layout_constraintBottom_toBottomOf="@id/youtube_thumbnail"
+        app:layout_constraintBottom_toBottomOf="@id/youtube_play_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -18,9 +18,9 @@
     <ImageView
         android:id="@+id/youtube_thumbnail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
         android:alpha="0.2"
-        android:src="@drawable/battleground_logo"
+        android:src="@drawable/gallery6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
