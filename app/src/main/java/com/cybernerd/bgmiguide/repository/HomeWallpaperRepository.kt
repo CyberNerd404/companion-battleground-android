@@ -20,7 +20,6 @@ class HomeWallpaperRepository {
                 response: Response<WallpapersModel>,
             ) {
                 wallpaperLiveData.value = response.body()
-                debug("NewsRepositorySuccess : call = ${response.body()}")
                 showProgress.value = false
 
             }
@@ -28,7 +27,6 @@ class HomeWallpaperRepository {
             override fun onFailure(call: Call<WallpapersModel>, t: Throwable) {
                 try {
                     showProgress.value = false
-                    error("NewsRepositoryFailure : error = ${t.message}")
                 } catch (e: Exception) {
                     showProgress.value = false
                 }

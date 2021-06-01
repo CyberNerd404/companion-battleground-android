@@ -45,7 +45,6 @@ class HomeNewsFragment : BaseFragment(), NewsListener {
 
         viewModel.getNews()
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
-            debug("HomeFragment : news data = ${it.news}")
             setHomeCardView(it)
         })
 

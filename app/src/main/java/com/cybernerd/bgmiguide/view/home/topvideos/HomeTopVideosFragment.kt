@@ -43,7 +43,6 @@ class HomeTopVideosFragment : BaseFragment(), VideoListener {
 
         viewModel.getVideo()
         viewModel.videoLiveData.observe(viewLifecycleOwner, Observer {
-            debug("HomeFragment : video data = ${it.videos}")
             homeAdapter.setHomeVideo(it.videos)
         })
 

@@ -20,7 +20,6 @@ class NotificationRepository {
                 response: Response<NotificationModel>
             ) {
                 notificationLiveData.value = response.body()
-                debug("NewsRepositorySuccess : call = ${response.body()}")
                 showProgress.value = false
 
             }
@@ -28,7 +27,6 @@ class NotificationRepository {
             override fun onFailure(call: Call<NotificationModel>, t: Throwable) {
                 try {
                     showProgress.value = false
-                    error("NewsRepositoryFailure : error = ${t.message}")
                 }catch (e:Exception){
                     showProgress.value = false
                 }

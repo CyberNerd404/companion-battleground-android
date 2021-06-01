@@ -19,7 +19,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         super.onNewToken(token)
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
-                debug("Fetching FCM registration token failed ${task.exception}")
                 return@OnCompleteListener
             }
 
@@ -27,7 +26,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val firebaseToken = task.result
 
             // Log and toast
-            debug("token : $firebaseToken")
 
         })
     }
@@ -35,7 +33,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(response: RemoteMessage) {
         super.onMessageReceived(response)
         val dataType = response.data.get("type")
-        debug("show Response : ${response.data}")
         val titleStr = response.data.get("title")
         val desc = response.data.get("description")
         if (titleStr != null && desc != null) {

@@ -20,7 +20,6 @@ class HomeVideoRepository {
                 response: Response<HomeVideosModel>
             ) {
                 videoLiveData.value = response.body()
-                debug("RepositorySuccess : call = ${response.body()}")
                 showProgress.value = false
 
 
@@ -29,7 +28,6 @@ class HomeVideoRepository {
             override fun onFailure(call: Call<HomeVideosModel>, t: Throwable) {
                 try {
                     showProgress.value = false
-                    error("RepositoryFailure : error = ${t.message}")
                 } catch (e: Exception) {
                     showProgress.value = false
                 }

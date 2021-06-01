@@ -37,7 +37,6 @@ class NewsActivity : AppCompatActivity() {
         news_title.text = homeNewsModel?.title ?: ""
         published_date.text = homeNewsModel?.publishedDate ?: ""
         news_description.text = homeNewsModel?.description ?: ""
-        debug("hi"+ homeNewsModel?.description ?: "")
 
 
 

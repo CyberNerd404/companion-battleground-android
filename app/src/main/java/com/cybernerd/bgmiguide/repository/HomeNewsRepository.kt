@@ -20,7 +20,6 @@ class HomeNewsRepository {
                 response: Response<HomeNewsListModel>
             ) {
                 newsLiveData.value = response.body()
-                debug("NewsRepositorySuccess : call = ${response.body()}")
                 showProgress.value = false
 
             }
@@ -28,7 +27,6 @@ class HomeNewsRepository {
             override fun onFailure(call: Call<HomeNewsListModel>, t: Throwable) {
                 try {
                     showProgress.value = false
-                    error("NewsRepositoryFailure : error = ${t.message}")
                 }catch (e:Exception){
                     showProgress.value = false
                 }

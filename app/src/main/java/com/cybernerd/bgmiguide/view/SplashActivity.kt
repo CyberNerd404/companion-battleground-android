@@ -32,18 +32,15 @@ class SplashActivity : AppCompatActivity() {
 
             // Get new FCM registration token
             tokenKey = task.result.toString()
-            debug("send Token : $tokenKey")
         })
 
         val sharedPref = getPreferences(Context.MODE_PRIVATE) ?: return
 
         val key = resources.getString(R.string.saved_key)
         val keyVal = sharedPref.getString(key, "null")
-        debug("key : $keyVal")
         if (keyVal.equals("null", true)) {
             with(sharedPref.edit()) {
                 putString(getString(R.string.saved_key), "cybernerd")
-                debug("key added")
                 apply()
             }
             Handler().postDelayed({
@@ -51,7 +48,6 @@ class SplashActivity : AppCompatActivity() {
             }, 2000)
 
         } else {
-            debug("key already exist")
 
         }
 
@@ -66,14 +62,11 @@ class SplashActivity : AppCompatActivity() {
 
     private fun sendDeviceToken(key: String) {
 
-        debug("request key $key")
         val jsonObject = JsonObject()
         jsonObject.addProperty("token", key)
         CompanionApi().sendToken(jsonObject).enqueue(object : retrofit2.Callback<Token> {
             override fun onResponse(call: Call<Token>, response: Response<Token>) {
-                debug("request : ${call.request()}")
                 if (response.isSuccessful) {
-                    debug("Token send successfully : ${response.body()}")
                 }
             }
 
