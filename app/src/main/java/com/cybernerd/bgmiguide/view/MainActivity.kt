@@ -1,9 +1,10 @@
 package com.cybernerd.bgmiguide.view
 
-import android.content.Context
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.cybernerd.bgmiguide.R
@@ -16,6 +17,7 @@ import com.cybernerd.bgmiguide.view.information.InformationFragment
 import com.cybernerd.bgmiguide.view.notification.NotificationFragment
 import com.cybernerd.bgmiguide.view.setting.SettingFragment
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +29,11 @@ class MainActivity : BaseActivity() {
     private lateinit var navController: NavController
     var tokenKey = ""
     lateinit var sessionManager: SessionManager
+    lateinit var activeFragment: Fragment
+    private val homeFragment = HomeFragment()
+    private val notificationFragment = NotificationFragment()
+    private val settingFragment = SettingFragment()
+    private val informationFragment = InformationFragment()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,12 +41,11 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         sessionManager = SessionManager(this)
-        navController = findNavController(R.id.fragmentContainer)
 
         val intent = intent.extras
         val userExist = intent?.getString("userExist")
 
-        when (userExist) {
+        /*when (userExist) {
             "exist" -> {
                 initBottomNavigation()
             }
@@ -49,7 +55,38 @@ class MainActivity : BaseActivity() {
             "failed" -> {
                 sendToken()
             }
-        }
+        }*/
+
+        bottom_navigation.setOnNavigationItemSelectedListener(object :
+            BottomNavigationView.OnNavigationItemSelectedListener {
+            override fun onNavigationItemSelected(item: MenuItem): Boolean {
+                when (item.itemId) {
+                    R.id.home_menu -> {
+                        loadFragment(homeFragment)
+                        return true
+                    }
+                    R.id.information_menu -> {
+                        loadFragment(informationFragment)
+                        return true
+                    }
+                    R.id.notification_menu -> {
+                        loadFragment(notificationFragment)
+                        return true
+                    }
+                    R.id.setting_menu -> {
+                        loadFragment(settingFragment)
+                        return true
+                    }
+
+                    else -> {
+                        loadFragment(homeFragment)
+                        return false
+                    }
+                }
+            }
+
+        })
+        activeFragment = homeFragment
 
 
     }
@@ -68,7 +105,6 @@ class MainActivity : BaseActivity() {
             override fun onResponse(call: Call<Token>, response: Response<Token>) {
                 if (response.isSuccessful) {
                     sessionManager.saveAuthToken(tokenKey)
-                    initBottomNavigation()
                 }
             }
 
@@ -76,7 +112,7 @@ class MainActivity : BaseActivity() {
                 t.printStackTrace()
                 showToast(this@MainActivity,
                     "Please Contact Us, If you are not able to get any data")
-                loadFragment(SettingFragment(), R.id.setting_menu)
+                loadFragment(SettingFragment())
             }
 
         })
@@ -84,31 +120,39 @@ class MainActivity : BaseActivity() {
     }
 
 
-    private fun initBottomNavigation() {
+    /*private fun initBottomNavigation() {
         val extras = intent.extras
+        activeFragment = homeFragment
         when (extras?.getString("toOpen")) {
             "Home" -> {
-                loadFragment(HomeFragment(), R.id.home_menu)
+                loadFragment(homeFragment)
             }
             "Information" -> {
-                loadFragment(InformationFragment(), R.id.information_menu)
+                loadFragment(informationFragment)
             }
             "Notification" -> {
-                loadFragment(NotificationFragment(), R.id.notification_menu)
+                loadFragment(notificationFragment)
             }
             "Setting" -> {
-                loadFragment(SettingFragment(), R.id.setting_menu)
+                loadFragment(settingFragment)
             }
         }
         bottom_navigation.setupWithNavController(navController)
-    }
+    }*/
 
-    private fun loadFragment(fragment: Fragment, fragmentId: Int) {
+    private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.nav_host_fragment_container, fragment)
-        transaction.detach(fragment)
-        transaction.attach(fragment)
-        transaction.addToBackStack(null)
+        supportFragmentManager.executePendingTransactions()
+        if (!fragment.isAdded) {
+            transaction.hide(activeFragment)
+            transaction.add(R.id.fragmentContainer, fragment)
+            transaction.show(fragment)
+            activeFragment = fragment
+        } else {
+            transaction.hide(activeFragment)
+            transaction.show(fragment)
+            activeFragment = fragment
+        }
         transaction.commitAllowingStateLoss()
         supportFragmentManager.executePendingTransactions()
 

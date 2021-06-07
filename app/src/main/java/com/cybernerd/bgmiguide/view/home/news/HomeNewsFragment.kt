@@ -1,8 +1,6 @@
 package com.cybernerd.bgmiguide.view.home.news
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +12,6 @@ import com.cybernerd.bgmiguide.adapter.HomeNewsAdapter
 import com.cybernerd.bgmiguide.model.HomeNewsListModel
 import com.cybernerd.bgmiguide.model.HomeNewsModel
 import com.cybernerd.bgmiguide.utils.NewsListener
-import com.cybernerd.bgmiguide.utils.debug
 import com.cybernerd.bgmiguide.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home_news.*
 
@@ -48,6 +45,7 @@ class HomeNewsFragment : BaseFragment(), NewsListener {
 
         viewModel.getNews()
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
+            if (it != null)
             setHomeCardView(it)
         })
 
