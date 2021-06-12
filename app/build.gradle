@@ -8,6 +8,14 @@ plugins {
 }
 
 android {
+    signingConfigs{
+        config{
+            keyAlias 'bgmiGuideAlias'
+            keyPassword 'bgmiGuide'
+            storeFile file('/StudioProjects/companion-battleground-android/bgmi-key.jks')
+            storePassword 'bgmiGuide'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion '30.0.3'
 
@@ -23,8 +31,6 @@ android {
 
     buildTypes {
         release {
-            shrinkResources true
-            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
