@@ -26,14 +26,17 @@ class HomeNewsAdapter(private val context: Context, val clickListeners: NewsList
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
-        val v =
-            LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.item_home_news_layout, parent, false)
-        return ViewHolder(v)
+        return ViewHolder(view)
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        if (list != null){
+            return list.size
+        }else{
+            return 0
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -42,8 +45,7 @@ class HomeNewsAdapter(private val context: Context, val clickListeners: NewsList
             .placeholder(R.drawable.battleground_logo)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.itemView.event_iv)
-        holder.itemView.title_tv.text = list[position].title
-
+            holder.itemView.title_tv.text = list[position].title
         holder.itemView.setOnClickListener {
             clickListeners.newsListener(list[position])
         }

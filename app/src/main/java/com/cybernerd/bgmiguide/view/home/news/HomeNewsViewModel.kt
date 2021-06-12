@@ -11,14 +11,11 @@ import com.cybernerd.bgmiguide.utils.debug
 
 class HomeNewsViewModel(context: Context): ViewModel() {
 
-    lateinit var newsRepository: HomeNewsRepository
+    var newsRepository = HomeNewsRepository()
     var newsLiveData = MutableLiveData<HomeNewsListModel>()
     val showprogress : LiveData<Boolean>
 
     init {
-        newsRepository = SessionManager(context).fetchAuthToken()?.let {
-            HomeNewsRepository(it)
-        }!!
         this.showprogress = newsRepository.showProgress
         this.newsLiveData = newsRepository.newsLiveData
     }

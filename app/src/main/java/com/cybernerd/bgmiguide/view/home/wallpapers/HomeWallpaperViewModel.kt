@@ -12,15 +12,12 @@ import com.cybernerd.bgmiguide.utils.SessionManager
 
 class HomeWallpaperViewModel(context: Context) : ViewModel() {
 
-    lateinit var wallpaperRepository: HomeWallpaperRepository
+    var wallpaperRepository = HomeWallpaperRepository()
     var wallpaperLiveData = MutableLiveData<WallpapersModel>()
     val showprogress: LiveData<Boolean>
 
 
     init {
-        wallpaperRepository = SessionManager(context).fetchAuthToken()?.let {
-            HomeWallpaperRepository(it)
-        }!!
         this.showprogress = wallpaperRepository.showProgress
         this.wallpaperLiveData = wallpaperRepository.wallpaperLiveData
     }

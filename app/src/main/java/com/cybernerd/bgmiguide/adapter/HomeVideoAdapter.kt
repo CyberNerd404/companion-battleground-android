@@ -14,9 +14,9 @@ import kotlinx.android.synthetic.main.item_home_video_layout.view.*
 
 class HomeVideoAdapter(private val context: Context, val clickListeners: VideoListener) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var list: List<Videos> = arrayListOf()
+    var list: List<Videos?> = arrayListOf()
 
-    fun setHomeVideo(list: List<Videos>) {
+    fun setHomeVideo(list: List<Videos?>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -35,15 +35,15 @@ class HomeVideoAdapter(private val context: Context, val clickListeners: VideoLi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
         Glide.with(this.context)
-            .load(list[position].thumbnail)
+            .load(list[position]?.thumbnail)
             .placeholder(R.drawable.battleground_logo)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.itemView.youtube_thumbnail)
 
-        holder.itemView.youtube_title.text = list[position].title
+        holder.itemView.youtube_title.text = list[position]?.title
 
         holder.itemView.setOnClickListener {
-            clickListeners.videoListener(list[position])
+            list[position]?.let { it1 -> clickListeners.videoListener(it1) }
         }
 
     }

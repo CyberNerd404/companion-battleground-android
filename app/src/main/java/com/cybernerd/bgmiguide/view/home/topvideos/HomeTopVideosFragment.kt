@@ -43,7 +43,9 @@ class HomeTopVideosFragment : BaseFragment(), VideoListener {
 
         viewModel.getVideo()
         viewModel.videoLiveData.observe(viewLifecycleOwner, Observer {
-            homeAdapter.setHomeVideo(it.videos)
+            if (it != null){
+                homeAdapter.setHomeVideo(it.videos)
+            }
         })
 
         viewModel.showprogress.observe(viewLifecycleOwner, Observer {

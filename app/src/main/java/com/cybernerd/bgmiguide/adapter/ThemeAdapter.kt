@@ -42,7 +42,7 @@ class ThemeAdapter(private val context: Context, val clickListeners: WallpaperLi
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         Glide.with(this.context)
             .asBitmap()
-            .load(list[position].image)
+            .load(list[position]?.image)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(object : CustomTarget<Bitmap>(){
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {

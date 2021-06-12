@@ -1,6 +1,8 @@
 package com.cybernerd.bgmiguide.view.home.news
 
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +13,9 @@ import com.cybernerd.bgmiguide.R
 import com.cybernerd.bgmiguide.adapter.HomeNewsAdapter
 import com.cybernerd.bgmiguide.model.HomeNewsListModel
 import com.cybernerd.bgmiguide.model.HomeNewsModel
+import com.cybernerd.bgmiguide.utils.NetworkManager
 import com.cybernerd.bgmiguide.utils.NewsListener
+import com.cybernerd.bgmiguide.utils.debug
 import com.cybernerd.bgmiguide.view.BaseFragment
 import kotlinx.android.synthetic.main.fragment_home_news.*
 
@@ -20,6 +24,8 @@ class HomeNewsFragment : BaseFragment(), NewsListener {
 
 
     lateinit var homeAdapter: HomeNewsAdapter
+    lateinit var networkManager: NetworkManager
+
 
     private val viewModel: HomeNewsViewModel by lazy {
         HomeNewsViewModel(requireContext())
@@ -43,6 +49,11 @@ class HomeNewsFragment : BaseFragment(), NewsListener {
         home_news_rv.layoutManager = GridLayoutManager(requireContext(), 1)
 
 
+        networkManager = NetworkManager(requireContext())
+
+        val isAvailable = networkManager.isNetworkAvailable
+        debug("isAvailable : $isAvailable")
+
         viewModel.getNews()
         viewModel.newsLiveData.observe(viewLifecycleOwner, Observer {
             if (it != null)
@@ -61,8 +72,11 @@ class HomeNewsFragment : BaseFragment(), NewsListener {
     }
 
     private fun setHomeCardView(newsResponse: HomeNewsListModel) {
-        homeAdapter.setHomeCardView(newsResponse)
+        if (newsResponse != null){
+            homeAdapter.setHomeCardView(newsResponse)
+        }
     }
+
 
 
     override fun newsListener(homeNewsModel: HomeNewsModel) {

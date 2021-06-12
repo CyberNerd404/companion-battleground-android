@@ -52,6 +52,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             .setSmallIcon(R.mipmap.ic_launcher)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setOngoing(true)
+            .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
 

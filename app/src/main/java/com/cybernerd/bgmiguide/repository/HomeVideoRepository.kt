@@ -9,19 +9,21 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HomeVideoRepository(val token: String) {
+class HomeVideoRepository() {
     val videoLiveData = MutableLiveData<HomeVideosModel>()
     val showProgress = MutableLiveData<Boolean>()
 
     fun getVideo() {
         showProgress.value = true
-        CompanionApi().getHomeVideos(token).enqueue(object : Callback<HomeVideosModel> {
+        CompanionApi().getHomeVideos().enqueue(object : Callback<HomeVideosModel> {
             override fun onResponse(
                 call: Call<HomeVideosModel>,
-                response: Response<HomeVideosModel>
+                response: Response<HomeVideosModel>,
             ) {
-                videoLiveData.value = response.body()
-                showProgress.value = false
+                if (response.isSuccessful) {
+                    videoLiveData.value = response.body()
+                    showProgress.value = false
+                }
 
 
             }

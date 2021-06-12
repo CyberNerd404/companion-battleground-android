@@ -4,9 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.setupWithNavController
 import com.cybernerd.bgmiguide.R
 import com.cybernerd.bgmiguide.model.Token
 import com.cybernerd.bgmiguide.network.CompanionApi
@@ -26,7 +23,6 @@ import retrofit2.Response
 
 class MainActivity : BaseActivity() {
 
-    private lateinit var navController: NavController
     var tokenKey = ""
     lateinit var sessionManager: SessionManager
     lateinit var activeFragment: Fragment
@@ -118,27 +114,6 @@ class MainActivity : BaseActivity() {
         })
 
     }
-
-
-    /*private fun initBottomNavigation() {
-        val extras = intent.extras
-        activeFragment = homeFragment
-        when (extras?.getString("toOpen")) {
-            "Home" -> {
-                loadFragment(homeFragment)
-            }
-            "Information" -> {
-                loadFragment(informationFragment)
-            }
-            "Notification" -> {
-                loadFragment(notificationFragment)
-            }
-            "Setting" -> {
-                loadFragment(settingFragment)
-            }
-        }
-        bottom_navigation.setupWithNavController(navController)
-    }*/
 
     private fun loadFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()

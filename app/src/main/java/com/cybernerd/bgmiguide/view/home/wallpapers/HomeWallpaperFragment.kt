@@ -45,7 +45,9 @@ class HomeWallpaperFragment : BaseFragment(), WallpaperListener {
 
         viewModel.getWallpapers()
         viewModel.wallpaperLiveData.observe(viewLifecycleOwner, Observer {
-            themeAdapter.setWallpaperGrid(it.wallpapers)
+            if (it != null){
+                themeAdapter.setWallpaperGrid(it.wallpapers)
+            }
         })
 
         viewModel.showprogress.observe(viewLifecycleOwner, Observer {

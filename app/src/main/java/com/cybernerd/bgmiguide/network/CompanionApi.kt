@@ -24,23 +24,23 @@ interface CompanionApi {
 
     @GET("/api/v1/videos")
     fun getHomeVideos(
-        @Header("Authorization") token: String,
+        /*@Header("Authorization") token: String,*/
     ): Call<HomeVideosModel>
 
 
     @GET("/api/v1/news")
     fun getHomeNews(
-        @Header("Authorization") token: String,
+        /*@Header("Authorization") token: String,*/
     ): Call<HomeNewsListModel>
 
     @GET("/api/v1/notifications")
     fun getNotifications(
-        @Header("Authorization") token: String,
+        /*@Header("Authorization") token: String,*/
     ): Call<NotificationModel>
 
     @GET("/api/v1/wallpapers")
     fun getWallpapers(
-        @Header("Authorization") token: String,
+        /*@Header("Authorization") token: String,*/
     ): Call<WallpapersModel>
 
 

@@ -41,7 +41,9 @@ class NotificationFragment : BaseFragment(), NotificationListener {
 
         viewModel.getNotifications()
         viewModel.liveData.observe(viewLifecycleOwner, Observer {
-            notificationAdapter.setNotification(it)
+            if (it != null){
+                notificationAdapter.setNotification(it)
+            }
         })
 
         viewModel.showprogress.observe(viewLifecycleOwner, Observer {
