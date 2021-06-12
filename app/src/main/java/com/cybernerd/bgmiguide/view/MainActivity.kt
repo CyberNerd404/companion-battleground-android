@@ -1,6 +1,8 @@
 package com.cybernerd.bgmiguide.view
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -38,20 +40,21 @@ class MainActivity : BaseActivity() {
 
         sessionManager = SessionManager(this)
 
-        val intent = intent.extras
-        val userExist = intent?.getString("userExist")
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            tokenKey = task.result.toString()
+        })
 
-        /*when (userExist) {
-            "exist" -> {
-                initBottomNavigation()
-            }
-            "success" -> {
-                initBottomNavigation()
-            }
-            "failed" -> {
-                sendToken()
-            }
-        }*/
+        sessionManager.fetchAuthToken()
+        val keyVal = sessionManager.fetchAuthToken()
+        if (keyVal == null) {
+            Handler(Looper.myLooper()!!).postDelayed(Runnable {
+                sendDeviceToken(tokenKey)
+            }, 2000)
+        }
 
         bottom_navigation.setOnNavigationItemSelectedListener(object :
             BottomNavigationView.OnNavigationItemSelectedListener {
@@ -87,31 +90,22 @@ class MainActivity : BaseActivity() {
 
     }
 
-    private fun sendToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                return@OnCompleteListener
-            }
-            // Get new FCM registration token
-            tokenKey = task.result.toString()
-        })
+    private fun sendDeviceToken(key: String) {
         val jsonObject = JsonObject()
-        jsonObject.addProperty(resources.getString(R.string.token), tokenKey)
+        jsonObject.addProperty("token", key)
         CompanionApi().sendToken(jsonObject).enqueue(object : retrofit2.Callback<Token> {
             override fun onResponse(call: Call<Token>, response: Response<Token>) {
                 if (response.isSuccessful) {
-                    sessionManager.saveAuthToken(tokenKey)
+                    sessionManager.saveAuthToken("BGMIGuide $key")
                 }
             }
 
             override fun onFailure(call: Call<Token>, t: Throwable) {
                 t.printStackTrace()
-                showToast(this@MainActivity,
-                    "Please Contact Us, If you are not able to get any data")
-                loadFragment(SettingFragment())
             }
 
         })
+
 
     }
 
