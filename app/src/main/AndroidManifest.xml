@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.cybernerd.bgmiguide">
+    package="com.cybernerd404.bgmiguide">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -14,23 +14,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.CompanionBattleGroundIndia">
-        <activity android:name="com.cybernerd.bgmiguide.view.setting.WebViewActivity"></activity>
-        <activity android:name="com.cybernerd.bgmiguide.ComingSoonActivity" />
-        <activity android:name="com.cybernerd.bgmiguide.view.home.wallpapers.WallpaperActivity" />
-        <activity android:name="com.cybernerd.bgmiguide.view.home.topvideos.VideoActivity" />
-        <activity android:name="com.cybernerd.bgmiguide.view.home.news.NewsActivity" />
-        <activity android:name="com.cybernerd.bgmiguide.view.SplashActivity">
+        <activity android:name="com.cybernerd404.bgmiguide.view.setting.WebViewActivity"></activity>
+        <activity android:name="com.cybernerd404.bgmiguide.ComingSoonActivity" />
+        <activity android:name="com.cybernerd404.bgmiguide.view.home.wallpapers.WallpaperActivity" />
+        <activity android:name="com.cybernerd404.bgmiguide.view.home.topvideos.VideoActivity" />
+        <activity android:name="com.cybernerd404.bgmiguide.view.home.news.NewsActivity" />
+        <activity android:name="com.cybernerd404.bgmiguide.view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.cybernerd.bgmiguide.view.MainActivity" />
+        <activity android:name="com.cybernerd404.bgmiguide.view.MainActivity" />
 
         <service
-            android:name="com.cybernerd.bgmiguide.utils.MyFirebaseMessagingService"
+            android:name="com.cybernerd404.bgmiguide.utils.MyFirebaseMessagingService"
             android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

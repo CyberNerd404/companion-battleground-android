@@ -7,22 +7,22 @@
 
     <fragment
         android:id="@+id/home_menu"
-        android:name="com.cybernerd.bgmiguide.view.home.HomeFragment"
+        android:name="com.cybernerd404.bgmiguide.view.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/information_menu"
-        android:name="com.cybernerd.bgmiguide.view.information.InformationFragment"
+        android:name="com.cybernerd404.bgmiguide.view.information.InformationFragment"
         android:label="fragment_information"
         tools:layout="@layout/fragment_information" />
     <fragment
         android:id="@+id/notification_menu"
-        android:name="com.cybernerd.bgmiguide.view.notification.NotificationFragment"
+        android:name="com.cybernerd404.bgmiguide.view.notification.NotificationFragment"
         android:label="fragment_notification"
         tools:layout="@layout/fragment_notification" />
     <fragment
         android:id="@+id/setting_menu"
-        android:name="com.cybernerd.bgmiguide.view.setting.SettingFragment"
+        android:name="com.cybernerd404.bgmiguide.view.setting.SettingFragment"
         android:label="fragment_setting"
         tools:layout="@layout/fragment_setting" />
 </navigation>
