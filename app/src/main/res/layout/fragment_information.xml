@@ -8,6 +8,7 @@ android:background="@drawable/app_background_img"
 android:id="@+id/wallpaper_view"
 tools:context=".view.information.InformationFragment">
 
+
     <TextView
         android:id="@+id/notiticationTitle"
         android:layout_width="match_parent"

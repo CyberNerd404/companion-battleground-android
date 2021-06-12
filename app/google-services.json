@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:966823922771:android:c579de062c0323fd8f8aa6",
+        "mobilesdk_app_id": "1:966823922771:android:34884379fb92a7558f8aa6",
         "android_client_info": {
-          "package_name": "com.cybernerd.bgmiguide"
+          "package_name": "com.cybernerd404.bgmiguide"
         }
       },
       "oauth_client": [
