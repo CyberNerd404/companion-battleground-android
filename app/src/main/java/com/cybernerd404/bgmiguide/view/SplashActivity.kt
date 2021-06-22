@@ -14,9 +14,10 @@ class SplashActivity : AppCompatActivity() {
 
         Handler().postDelayed({
             Intent(this, MainActivity::class.java).apply {
+                addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(this)
             }
-        }, 3000)
+        }, 2000)
 
 
     }

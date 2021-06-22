@@ -9,29 +9,32 @@
 
     <application
         android:allowBackup="true"
-        android:largeHeap="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:networkSecurityConfig="@xml/network_security_config"
         android:theme="@style/Theme.CompanionBattleGroundIndia">
-        <activity android:name="com.cybernerd404.bgmiguide.view.setting.WebViewActivity"></activity>
-        <activity android:name="com.cybernerd404.bgmiguide.ComingSoonActivity" />
-        <activity android:name="com.cybernerd404.bgmiguide.view.home.wallpapers.WallpaperActivity" />
-        <activity android:name="com.cybernerd404.bgmiguide.view.home.topvideos.VideoActivity" />
-        <activity android:name="com.cybernerd404.bgmiguide.view.home.news.NewsActivity" />
-        <activity android:name="com.cybernerd404.bgmiguide.view.SplashActivity">
+        <activity android:name=".view.information.sounds.SoundsActivity"></activity>
+        <activity android:name=".view.information.maps.MapsActivity" />
+        <activity android:name=".view.information.guns.GunsActivity" />
+        <activity android:name=".view.setting.WebViewActivity" />
+        <activity android:name=".ComingSoonActivity" />
+        <activity android:name=".view.home.wallpapers.WallpaperActivity" />
+        <activity android:name=".view.home.topvideos.VideoActivity" />
+        <activity android:name=".view.home.news.NewsActivity" />
+        <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.cybernerd404.bgmiguide.view.MainActivity" />
+        <activity android:name=".view.MainActivity" />
 
         <service
-            android:name="com.cybernerd404.bgmiguide.utils.MyFirebaseMessagingService"
+            android:name=".utils.MyFirebaseMessagingService"
             android:enabled="true">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

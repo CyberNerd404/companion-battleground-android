@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         applicationId "com.cybernerd404.bgmiguide"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 2
         versionName "0.2"
@@ -97,5 +97,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging'
 
     implementation 'io.alterac.blurkit:blurkit:1.1.0'
+
+    // facebook ads
+    implementation 'com.facebook.android:audience-network-sdk:6.5.0'
 
 }

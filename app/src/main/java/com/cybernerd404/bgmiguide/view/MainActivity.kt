@@ -13,6 +13,8 @@ import com.cybernerd404.bgmiguide.view.home.HomeFragment
 import com.cybernerd404.bgmiguide.view.information.InformationFragment
 import com.cybernerd404.bgmiguide.view.notification.NotificationFragment
 import com.cybernerd404.bgmiguide.view.setting.SettingFragment
+import com.facebook.ads.AdSize
+import com.facebook.ads.AdView
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.messaging.FirebaseMessaging
@@ -31,12 +33,17 @@ class MainActivity : BaseActivity() {
     private val settingFragment = SettingFragment()
     private val informationFragment = InformationFragment()
 
+    lateinit var adView: AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         sessionManager = SessionManager(this)
+
+        adView = AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50)
+        banner_container.addView(adView)
+        adView.loadAd()
 
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -86,6 +93,11 @@ class MainActivity : BaseActivity() {
         activeFragment = homeFragment
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        adView.destroy()
     }
 
     private fun sendDeviceToken(key: String) {
