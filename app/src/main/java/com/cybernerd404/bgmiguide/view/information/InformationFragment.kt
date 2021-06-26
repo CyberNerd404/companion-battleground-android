@@ -15,6 +15,7 @@ import com.cybernerd404.bgmiguide.adapter.InformationCategoryAdapter
 import com.cybernerd404.bgmiguide.model.InformationModel
 import com.cybernerd404.bgmiguide.utils.InformationListener
 import com.cybernerd404.bgmiguide.view.BaseFragment
+import com.cybernerd404.bgmiguide.view.information.guns.GunsActivity
 import com.cybernerd404.bgmiguide.view.information.maps.MapsActivity
 import kotlinx.android.synthetic.main.activity_wallpaper.*
 
@@ -80,7 +81,7 @@ class InformationFragment : BaseFragment(), InformationListener {
 
     override fun informationCategoryListener(position: Int) {
         activity.let {
-            Intent(it, MapsActivity::class.java).apply {
+            Intent(it, GunsActivity::class.java).apply {
                 putExtra("position", position)
                 startActivity(this)
             }

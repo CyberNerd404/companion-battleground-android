@@ -7,7 +7,12 @@
     android:background="@drawable/app_background_img"
     tools:context=".view.information.guns.GunsActivity">
 
-
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/guns_rv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
