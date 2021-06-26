@@ -17,9 +17,9 @@
         tools:layout="@layout/fragment_information" />
     <fragment
         android:id="@+id/notification_menu"
-        android:name="com.cybernerd404.bgmiguide.view.notification.NotificationFragment"
+        android:name="com.cybernerd404.bgmiguide.view.quiz.QuizFragment"
         android:label="fragment_notification"
-        tools:layout="@layout/fragment_notification" />
+        tools:layout="@layout/fragment_quiz" />
     <fragment
         android:id="@+id/setting_menu"
         android:name="com.cybernerd404.bgmiguide.view.setting.SettingFragment"

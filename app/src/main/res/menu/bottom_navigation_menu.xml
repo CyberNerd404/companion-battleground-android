@@ -15,9 +15,9 @@
     <item
         android:id="@+id/notification_menu"
         android:enabled="true"
-        android:icon="@drawable/ic_notification_black"
+        android:icon="@drawable/ic_baseline_que_ans"
         android:iconTint="@color/nav_icon"
-        android:title="Notification"/>
+        android:title="Quiz"/>
     <item
         android:id="@+id/setting_menu"
         android:enabled="true"

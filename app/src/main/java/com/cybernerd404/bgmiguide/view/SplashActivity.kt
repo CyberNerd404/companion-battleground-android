@@ -17,7 +17,7 @@ class SplashActivity : AppCompatActivity() {
                 addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(this)
             }
-        }, 2000)
+        }, 1000)
 
 
     }

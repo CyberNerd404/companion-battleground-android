@@ -11,7 +11,7 @@ import com.cybernerd404.bgmiguide.network.CompanionApi
 import com.cybernerd404.bgmiguide.utils.SessionManager
 import com.cybernerd404.bgmiguide.view.home.HomeFragment
 import com.cybernerd404.bgmiguide.view.information.InformationFragment
-import com.cybernerd404.bgmiguide.view.notification.NotificationFragment
+import com.cybernerd404.bgmiguide.view.quiz.QuizFragment
 import com.cybernerd404.bgmiguide.view.setting.SettingFragment
 import com.facebook.ads.AdSize
 import com.facebook.ads.AdView
@@ -29,7 +29,7 @@ class MainActivity : BaseActivity() {
     lateinit var sessionManager: SessionManager
     lateinit var activeFragment: Fragment
     private val homeFragment = HomeFragment()
-    private val notificationFragment = NotificationFragment()
+    private val notificationFragment = QuizFragment()
     private val settingFragment = SettingFragment()
     private val informationFragment = InformationFragment()
 

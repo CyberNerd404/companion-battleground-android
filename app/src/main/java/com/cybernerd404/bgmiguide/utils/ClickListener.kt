@@ -25,3 +25,7 @@ interface InformationListener{
 interface WallpaperListener{
     fun wallpaperListener(wallpaper: WallpapersModel, position: Int)
 }
+
+interface QuizListener{
+    fun quizListener(quizUIModel: QuizUIModel)
+}
