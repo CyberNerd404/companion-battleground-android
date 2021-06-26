@@ -80,12 +80,63 @@ class InformationFragment : BaseFragment(), InformationListener {
 
 
     override fun informationCategoryListener(position: Int) {
-        activity.let {
-            Intent(it, GunsActivity::class.java).apply {
-                putExtra("position", position)
-                startActivity(this)
+        when(position){
+            0 -> {
+                activity.let {
+                    Intent(it, MapsActivity::class.java).apply {
+                        putExtra("position", position)
+                        startActivity(this)
+                    }
+                }
             }
+
+            1 -> {
+                activity.let {
+                    Intent(it, GunsActivity::class.java).apply {
+                        putExtra("position", position)
+                        startActivity(this)
+                    }
+                }
+            }
+
+            2 -> {
+                activity.let {
+                    Intent(it, ComingSoonActivity::class.java).apply {
+                        putExtra("position", position)
+                        startActivity(this)
+                    }
+                }
+            }
+
+            3 -> {
+                activity.let {
+                    Intent(it, ComingSoonActivity::class.java).apply {
+                        putExtra("position", position)
+                        startActivity(this)
+                    }
+                }
+            }
+
+            4 -> {
+                activity.let {
+                    Intent(it, ComingSoonActivity::class.java).apply {
+                        putExtra("position", position)
+                        startActivity(this)
+                    }
+                }
+            }
+
+            5 -> {
+                activity.let {
+                    Intent(it, ComingSoonActivity::class.java).apply {
+                        putExtra("position", position)
+                        startActivity(this)
+                    }
+                }
+            }
+
         }
+
     }
 
 
