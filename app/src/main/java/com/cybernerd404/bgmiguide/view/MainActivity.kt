@@ -45,6 +45,8 @@ class MainActivity : BaseActivity() {
         banner_container.addView(adView)
         adView.loadAd()
 
+        activeFragment = homeFragment
+
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 return@OnCompleteListener
@@ -115,8 +117,6 @@ class MainActivity : BaseActivity() {
             }
 
         })
-
-
     }
 
     private fun loadFragment(fragment: Fragment) {
