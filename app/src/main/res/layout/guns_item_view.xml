@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
-        android:background="@drawable/settings_cardview_background"
-        android:padding="4dp">
+        android:gravity="center"
+        android:padding="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:background="@drawable/settings_cardview_background">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/top_view"
@@ -66,27 +68,19 @@
             app:layout_constraintTop_toBottomOf="@id/top_view"
             tools:layout_editor_absoluteX="4dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/left_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+
+            <ImageView
+                android:id="@+id/gun_img"
+                android:layout_width="85dp"
+                android:layout_height="85dp"
+                android:layout_margin="4dp"
+                android:rotation="30"
+                android:src="@drawable/snipper"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/right_view"
-                app:layout_constraintStart_toStartOf="parent">
-
-                <ImageView
-                    android:id="@+id/gun_img"
-                    android:layout_width="150dp"
-                    android:layout_height="150dp"
-                    android:layout_margin="4dp"
-                    android:rotation="30"
-                    android:src="@drawable/snipper"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="MissingConstraints" />
-
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/right_view"
@@ -94,7 +88,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/left_view"
+                app:layout_constraintStart_toEndOf="@+id/gun_img"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -404,7 +398,7 @@
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/bottom_left_view"
+                android:id="@+id/bottom_gun_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -421,7 +415,7 @@
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/bottom_left_view" />
+                    app:layout_constraintTop_toTopOf="@+id/bottom_gun_img" />
 
                 <TextView
                     android:id="@+id/ammo_value_tv"
@@ -441,7 +435,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/bottom_left_view"
+                app:layout_constraintLeft_toRightOf="@+id/bottom_gun_img"
                 app:layout_constraintRight_toLeftOf="@+id/bottom_end_view"
                 app:layout_constraintTop_toTopOf="@+id/bottom_view">
 
@@ -505,8 +499,5 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+    </RelativeLayout>
