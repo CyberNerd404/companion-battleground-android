@@ -1,10 +1,12 @@
 package com.cybernerd404.bgmiguide.view.information.guns
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.cybernerd404.bgmiguide.ComingSoonActivity
 import com.cybernerd404.bgmiguide.R
 import com.cybernerd404.bgmiguide.adapter.GunsAdapter
 import com.cybernerd404.bgmiguide.model.GunsModelX
@@ -40,6 +42,11 @@ class GunsActivity : AppCompatActivity() {
                 guns_progress.visibility = View.GONE
             }
         })
+
+        filterFloatingButton.setOnClickListener{
+                val intent = Intent(this, FilterGunActivity::class.java)
+                    startActivity(intent)
+        }
 
     }
 

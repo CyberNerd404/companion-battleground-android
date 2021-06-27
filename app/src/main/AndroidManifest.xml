@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CompanionBattleGroundIndia">
-        <activity android:name=".view.quiz.QuizResultActivity"></activity>
+        <activity android:name=".view.information.guns.FilterGunActivity"></activity>
+        <activity android:name=".view.quiz.QuizResultActivity" />
         <activity android:name=".view.quiz.BGMIItemQuizActivity" />
         <activity android:name=".view.quiz.RandomQuizActivity" />
         <activity android:name=".view.quiz.WeaponQuizActivity" />

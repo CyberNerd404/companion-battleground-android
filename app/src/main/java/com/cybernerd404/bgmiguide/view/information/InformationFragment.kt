@@ -15,6 +15,7 @@ import com.cybernerd404.bgmiguide.adapter.InformationCategoryAdapter
 import com.cybernerd404.bgmiguide.model.InformationModel
 import com.cybernerd404.bgmiguide.utils.InformationListener
 import com.cybernerd404.bgmiguide.view.BaseFragment
+import com.cybernerd404.bgmiguide.view.information.guns.FilterGunActivity
 import com.cybernerd404.bgmiguide.view.information.guns.GunsActivity
 import com.cybernerd404.bgmiguide.view.information.maps.MapsActivity
 import kotlinx.android.synthetic.main.activity_wallpaper.*
