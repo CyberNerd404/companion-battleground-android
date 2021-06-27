@@ -57,7 +57,6 @@ class HomeFragment : BaseFragment() {
 
         }.attach()
 
-
     }
 
 
