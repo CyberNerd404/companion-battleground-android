@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.cybernerd404.bgmiguide.R
 import com.cybernerd404.bgmiguide.model.GunsModelX
 import kotlinx.android.synthetic.main.guns_item_view.view.*
+import kotlinx.android.synthetic.main.item_home_news_layout.view.*
 
 class GunsAdapter(private val context: Context) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -31,6 +34,13 @@ class GunsAdapter(private val context: Context) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+
+        Glide.with(this.context)
+            .load(list[position].image_url)
+            .placeholder(R.drawable.snipper)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.itemView.gun_img)
+
 
         holder.itemView.gun_name_tv.text = list[position].name
         holder.itemView.guns_type_name.text = list[position].type

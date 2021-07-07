@@ -23,7 +23,7 @@ class VideoActivity : AppCompatActivity() {
         validate("vId : $vId")
 
         youtubePlayer = findViewById(R.id.youtube_player_view)
-
+        youtubePlayer.enterFullScreen()
         lifecycle.addObserver(youtubePlayer)
 
         youtubePlayer.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {

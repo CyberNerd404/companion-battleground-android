@@ -10,10 +10,13 @@ import com.cybernerd404.bgmiguide.ComingSoonActivity
 import com.cybernerd404.bgmiguide.R
 import com.cybernerd404.bgmiguide.adapter.GunsAdapter
 import com.cybernerd404.bgmiguide.model.GunsModelX
+import com.cybernerd404.bgmiguide.utils.debug
+import com.cybernerd404.bgmiguide.utils.showToast
+import com.facebook.ads.*
 import kotlinx.android.synthetic.main.activity_guns.*
 
 class GunsActivity : AppCompatActivity() {
-
+    private var interstitialAd: InterstitialAd? = null
     lateinit var list: MutableList<GunsModelX>
     lateinit var gunsAdapter: GunsAdapter
     val viewModel: GunsViewModel by lazy {
@@ -25,6 +28,7 @@ class GunsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_guns)
 
         gunsAdapter = GunsAdapter(this)
+        AudienceNetworkAds.initialize(this)
 
         guns_rv.adapter = gunsAdapter
         guns_rv.layoutManager = LinearLayoutManager(this)
@@ -44,8 +48,51 @@ class GunsActivity : AppCompatActivity() {
         })
 
         filterFloatingButton.setOnClickListener{
-                val intent = Intent(this, FilterGunActivity::class.java)
-                    startActivity(intent)
+                /*val intent = Intent(this, FilterGunActivity::class.java)
+                    startActivity(intent)*/
+            showToast(this, "Filter feature coming soon")
+        }
+
+        interstitialAd = InterstitialAd(this, "874198839852511_874207956518266")
+
+        val  adListener = object : InterstitialAdListener {
+            override fun onError(p0: Ad?, p1: AdError?) {
+                debug("error :${p0.toString()} ${p1?.errorMessage}")
+            }
+
+            override fun onAdLoaded(p0: Ad?) {
+                debug("onAdLoaded :${p0} ")
+                interstitialAd!!.show()
+
+            }
+
+            override fun onAdClicked(p0: Ad?) {
+                debug("onAdClicked :${p0} ")
+            }
+
+            override fun onLoggingImpression(p0: Ad?) {
+                debug("onLoggingImpression :${p0} ")
+            }
+
+            override fun onInterstitialDisplayed(p0: Ad?) {
+                debug("onInterstitialDisplayed :${p0} ")
+            }
+
+            override fun onInterstitialDismissed(p0: Ad?) {
+                debug("onInterstitialDisplayed :${p0} ")
+            }
+
+        }
+
+        val loadAdConfig = interstitialAd!!.buildLoadAdConfig()
+            .withAdListener(adListener)
+            .build()
+
+        interstitialAd!!.loadAd(loadAdConfig)
+
+        //and when you want to show ad
+        if (interstitialAd!!.isAdLoaded){
+            interstitialAd!!.show()
         }
 
     }

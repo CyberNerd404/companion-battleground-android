@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.*
 
-const val BASE_URL = "https://companion-battleground.herokuapp.com/"
+const val BASE_URL = "https://raw.githubusercontent.com/"
 
 interface CompanionApi {
 
@@ -22,13 +22,13 @@ interface CompanionApi {
         }
     }
 
-    @GET("/api/v1/videos")
+    @GET("/Ashutoshwahane/junk-data/main/videos.json")
     fun getHomeVideos(
         /*@Header("Authorization") token: String,*/
     ): Call<HomeVideosModel>
 
 
-    @GET("/api/v1/news")
+    @GET("/Ashutoshwahane/junk-data/main/news.json")
     fun getHomeNews(
         /*@Header("Authorization") token: String,*/
     ): Call<HomeNewsListModel>
@@ -38,7 +38,7 @@ interface CompanionApi {
         /*@Header("Authorization") token: String,*/
     ): Call<NotificationModel>
 
-    @GET("/api/v1/wallpapers")
+    @GET("/Ashutoshwahane/junk-data/main/wallpapers.json")
     fun getWallpapers(
         /*@Header("Authorization") token: String,*/
     ): Call<WallpapersModel>
