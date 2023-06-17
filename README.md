@@ -1,5 +1,5 @@
 # Companion-Battleground-Android App
-# Testing 
+# Testing and pull request
 
 <div align="center">
     <img src="app/resources/screen1.jpeg" width="300px"</img>
